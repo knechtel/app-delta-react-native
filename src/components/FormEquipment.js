@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
-import {Node} from 'react';
+import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
-import {Button, SafeAreaView, Alert, useColorScheme} from 'react-native';
+import {Button, SafeAreaView, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import axios from 'axios';
 import {CREATE_CLIENT} from '../util/urls';
 const FormEquipment = () => {
   const handleClick = () => {
-    // do something
     creaateClient();
     alert('Cliente cadastrado com sucesso!');
   };
