@@ -3,8 +3,9 @@ import {Node} from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 import {Button, SafeAreaView, Alert, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import CREATE_CLIENT from '../util/urls';
 
+import axios from 'axios';
+import {CREATE_CLIENT} from '../util/urls';
 const FormEquipment = () => {
   const handleClick = () => {
     // do something
@@ -19,27 +20,19 @@ const FormEquipment = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  function creaateClient() {
-    try {
-      const response = fetch(CREATE_CLIENT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-        }),
-      });
-
-      const json = response.json();
-
-      console.log(json.id);
-    } catch (err) {
-      throw err;
-      console.log(err);
-    }
-  }
+  const creaateClient = () => {
+    axios({
+      method: 'post',
+      url: CREATE_CLIENT,
+      headers: {
+        'Content-type': 'application/json',
+      },
+      data: {
+        name: name,
+        email: email,
+      },
+    });
+  };
   return (
     <>
       <SafeAreaView>
@@ -47,13 +40,15 @@ const FormEquipment = () => {
           style={styles.input}
           placeholder="Nome"
           value={name}
-          onChangeText={setName}
+          onChangeText={newName => setName(newName)}
+          defaultValue={name}
         />
         <TextInput
           style={styles.input}
           value={email}
           placeholder="Email"
-          onChangeText={setEmail}
+          onChangeText={newEmail => setEmail(newEmail)}
+          defaultValue={email}
         />
 
         <Button title="Press me" onPress={handleClick} />

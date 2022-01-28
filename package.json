@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "axios": "^0.25.0",
     "react": "17.0.2",
     "react-native": "0.67.1",
     "react-native-material-kit": "^0.6.0-beta.1",
