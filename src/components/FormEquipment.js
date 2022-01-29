@@ -54,17 +54,17 @@ const FormEquipment = () => {
         />
         <TextInput
           style={styles.input}
-          value={email}
+          value={cpf}
           placeholder="Cpf"
           onChangeText={newCpf => setCpf(newCpf)}
           defaultValue={cpf}
         />
         <TextInput
           style={styles.input}
-          value={email}
+          value={brand}
           placeholder="Marca"
           onChangeText={newBrand => setBrand(newBrand)}
-          defaultValue={cpf}
+          defaultValue={brand}
         />
         <Button title="Press me" onPress={handleClick} />
       </SafeAreaView>
