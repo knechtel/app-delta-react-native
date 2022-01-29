@@ -59,7 +59,9 @@ class ClientList extends Component {
             key={item.id}
             style={styles.container}
             onPress={() => this.alertItemName(item)}>
-            <Text style={styles.text}>{item.name}</Text>
+            <Text style={styles.text}>
+              {item.name} - {item.id}{' '}
+            </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
