@@ -12,6 +12,9 @@ const FormEquipment = () => {
   };
   const [name, setName] = React.useState();
   const [email, setEmail] = React.useState();
+  const [cpf, setCpf] = React.useState();
+
+  const [brand, setBrand] = React.useState();
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -28,6 +31,7 @@ const FormEquipment = () => {
       data: {
         name: name,
         email: email,
+        cpf: cpf,
       },
     });
   };
@@ -48,7 +52,20 @@ const FormEquipment = () => {
           onChangeText={newEmail => setEmail(newEmail)}
           defaultValue={email}
         />
-
+        <TextInput
+          style={styles.input}
+          value={email}
+          placeholder="Cpf"
+          onChangeText={newCpf => setCpf(newCpf)}
+          defaultValue={cpf}
+        />
+        <TextInput
+          style={styles.input}
+          value={email}
+          placeholder="Marca"
+          onChangeText={newBrand => setBrand(newBrand)}
+          defaultValue={cpf}
+        />
         <Button title="Press me" onPress={handleClick} />
       </SafeAreaView>
     </>
