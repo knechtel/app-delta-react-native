@@ -7,10 +7,12 @@
  */
 
 import React from 'react';
+import ClientList from './components/ClientList';
 import FormEquipment from './components/FormEquipment';
 
 const App = () => {
-  return <FormEquipment />;
+  const flagComponent = true;
+  return <>{flagComponent ? <ClientList /> : <FormEquipment />}</>;
 };
 
 export default App;
