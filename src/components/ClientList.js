@@ -4,29 +4,12 @@ import axios from 'axios';
 import {FIND_ALL_CLIENT} from '../util/urls';
 class ClientList extends Component {
   state = {
-    names: [
-      {
-        id: 0,
-        name: 'Ben',
-      },
-      {
-        id: 1,
-        name: 'Susan',
-      },
-      {
-        id: 2,
-        name: 'Robert',
-      },
-      {
-        id: 3,
-        name: 'Mary',
-      },
-    ],
+    client: [{}],
   };
   componentDidMount() {
     axios.get(FIND_ALL_CLIENT).then(response => {
       this.setState({
-        names: response.data,
+        client: response.data,
       });
       console.log(response.data);
     });
@@ -37,7 +20,7 @@ class ClientList extends Component {
   render() {
     return (
       <View>
-        {this.state.names.map((item, index) => (
+        {this.state.client.map((item, index) => (
           <TouchableOpacity
             key={item.id}
             style={styles.container}
