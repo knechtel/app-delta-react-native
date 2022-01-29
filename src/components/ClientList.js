@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, ScrollView, TouchableOpacity, StyleSheet} from 'react-native';
 import axios from 'axios';
 import {FIND_ALL_CLIENT} from '../util/urls';
 class ClientList extends Component {
   state = {
-    client: [{}],
+    client: [],
   };
   componentDidMount() {
     axios.get(FIND_ALL_CLIENT).then(response => {
@@ -19,7 +19,7 @@ class ClientList extends Component {
   };
   render() {
     return (
-      <View>
+      <ScrollView>
         {this.state.client.map((item, index) => (
           <TouchableOpacity
             key={item.id}
@@ -28,7 +28,7 @@ class ClientList extends Component {
             <Text style={styles.text}>{item.name}</Text>
           </TouchableOpacity>
         ))}
-      </View>
+      </ScrollView>
     );
   }
 }
