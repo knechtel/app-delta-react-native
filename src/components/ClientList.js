@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
-
+import axios from 'axios';
+import {FIND_ALL_CLIENT} from '../util/urls';
 class ClientList extends Component {
   state = {
     names: [
@@ -22,6 +23,14 @@ class ClientList extends Component {
       },
     ],
   };
+  componentDidMount() {
+    axios.get(FIND_ALL_CLIENT).then(response => {
+      this.setState({
+        names: response.data,
+      });
+      console.log(response.data);
+    });
+  }
   alertItemName = item => {
     alert(item.name);
   };

@@ -7,4 +7,5 @@ export const DELETE_EQUIPMENT = `http://localhost:8080/equipment-delete`;
 export const UPDATE_CLIENT = `http://localhost:8080/client-update`;
 export const UPDATE_EQUIPMENT = `http://localhost:8080/equipment-update`;
 export const EDIT_CLIENT_URL = 'http://localhost:3000/edit/';
+
 export const FIND_ALL_CLIENT = `http://10.0.0.199:8080/client-findAll`;
