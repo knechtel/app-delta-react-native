@@ -1,11 +1,37 @@
 import React, {Component} from 'react';
-import {Text, ScrollView, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  RefreshControl,
+} from 'react-native';
 import axios from 'axios';
 import {FIND_ALL_CLIENT} from '../util/urls';
+
 class ClientList extends Component {
-  state = {
-    client: [],
+  constructor(props) {
+    super(props);
+    this.state = {
+      client: [],
+      refreshing: false,
+    };
+  }
+  redirectToHome = () => {
+    const {navigation} = this.props;
+    navigation.navigate('FormEquipment');
   };
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    axios.get(FIND_ALL_CLIENT).then(response => {
+      this.setState({
+        client: response.data,
+      });
+      this.setState({refreshing: false});
+      console.log(response.data);
+    });
+  };
+
   componentDidMount() {
     axios.get(FIND_ALL_CLIENT).then(response => {
       this.setState({
@@ -16,10 +42,18 @@ class ClientList extends Component {
   }
   alertItemName = item => {
     alert(item.name);
+    this.setState({refreshing: false});
+    this.redirectToHome();
   };
   render() {
     return (
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }>
         {this.state.client.map((item, index) => (
           <TouchableOpacity
             key={item.id}
