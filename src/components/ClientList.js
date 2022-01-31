@@ -5,7 +5,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   RefreshControl,
+  Button,
 } from 'react-native';
+import {FAB} from 'react-native-elements';
+
 import axios from 'axios';
 import {FIND_ALL_CLIENT} from '../util/urls';
 
@@ -47,24 +50,31 @@ class ClientList extends Component {
   };
   render() {
     return (
-      <ScrollView
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh}
-          />
-        }>
-        {this.state.client.map((item, index) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.container}
-            onPress={() => this.alertItemName(item)}>
-            <Text style={styles.text}>
-              {item.name} - {item.id}{' '}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      <>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }>
+          {this.state.client.map((item, index) => (
+            <TouchableOpacity
+              key={item.id}
+              style={styles.container}
+              onPress={() => this.alertItemName(item)}>
+              <Text style={styles.text}>
+                {item.name} - {item.id}{' '}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+        <Button
+          onPress={this.redirectToHome}
+          title="Adicionar equipamento"
+          color="#841584"
+        />
+      </>
     );
   }
 }
