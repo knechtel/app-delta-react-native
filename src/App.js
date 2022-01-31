@@ -11,6 +11,8 @@ import ClientList from './components/ClientList';
 import FormEquipment from './components/FormEquipment';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {FAB} from 'react-native-elements';
+
 const Stack = createNativeStackNavigator();
 const App = () => {
   const flagComponent = true;
@@ -31,6 +33,7 @@ const App = () => {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      <FAB title="Adicionar" />
 
       {/* {flagComponent ? <ClientList /> : <FormEquipment />} */}
     </>
