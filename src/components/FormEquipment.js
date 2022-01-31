@@ -2,14 +2,13 @@ import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 import {Button, SafeAreaView, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import axios from 'axios';
+
 import {CREATE_CLIENT} from '../util/urls';
 
 const FormEquipment = () => {
-  const handleClick = () => {
-    creaateClient();
-    alert('Cliente cadastrado com sucesso!');
-  };
   const [name, setName] = React.useState();
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
@@ -66,7 +65,7 @@ const FormEquipment = () => {
           onChangeText={newBrand => setBrand(newBrand)}
           defaultValue={brand}
         />
-        <Button title="Press me" onPress={handleClick} />
+        <Button title="Enviar" onPress={this.handleClick} />
       </SafeAreaView>
     </>
   );
