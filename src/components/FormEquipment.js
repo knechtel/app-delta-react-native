@@ -14,13 +14,8 @@ const FormEquipment = () => {
   const [cpf, setCpf] = React.useState();
 
   const [brand, setBrand] = React.useState();
-  const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const creaateClient = () => {
+  const createClient = () => {
     axios({
       method: 'post',
       url: CREATE_CLIENT,
@@ -65,7 +60,7 @@ const FormEquipment = () => {
           onChangeText={newBrand => setBrand(newBrand)}
           defaultValue={brand}
         />
-        <Button title="Enviar" onPress={this.handleClick} />
+        <Button title="Enviar" onPress={createClient} />
       </SafeAreaView>
     </>
   );
