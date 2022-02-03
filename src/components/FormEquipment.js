@@ -3,7 +3,7 @@ import {StyleSheet, TextInput} from 'react-native';
 import {Button, SafeAreaView, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import {RadioButton} from 'react-native-paper';
 import axios from 'axios';
 
 import {CREATE_CLIENT} from '../util/urls';
@@ -14,6 +14,9 @@ const FormEquipment = () => {
   const [cpf, setCpf] = React.useState();
 
   const [brand, setBrand] = React.useState();
+  const [checked, setChecked] = React.useState(false);
+  const [autorizado, setAutorizado] = React.useState(false);
+  const [entregue, setEntregue] = React.useState(false);
 
   const createClient = () => {
     axios({
@@ -60,6 +63,21 @@ const FormEquipment = () => {
           onChangeText={newBrand => setBrand(newBrand)}
           defaultValue={brand}
         />
+        <RadioButton.Group
+          onValueChange={value => setChecked(value)}
+          value={checked}>
+          <RadioButton.Item label="Pronto" value="first" />
+        </RadioButton.Group>
+        <RadioButton.Group
+          onValueChange={value => setAutorizado(value)}
+          value={checked}>
+          <RadioButton.Item label="Autorizado" value="first" />
+        </RadioButton.Group>
+        <RadioButton.Group
+          onValueChange={value => setEntregue(value)}
+          value={checked}>
+          <RadioButton.Item label="Entregue" value="first" />
+        </RadioButton.Group>
         <Button title="Enviar" onPress={createClient} />
       </SafeAreaView>
     </>
