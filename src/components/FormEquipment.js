@@ -1,10 +1,8 @@
 import React from 'react';
 import {StyleSheet, TextInput, Text, View} from 'react-native';
-import {Button, SafeAreaView, useColorScheme} from 'react-native';
+import {Button, SafeAreaView} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RadioButton} from 'react-native-paper';
+
 import axios from 'axios';
 
 import {CREATE_CLIENT, CREATE_EQUIPMENT} from '../util/urls';
@@ -15,7 +13,7 @@ const FormEquipment = () => {
   const [cpf, setCpf] = React.useState();
 
   const [brand, setBrand] = React.useState();
-  const [checked, setChecked] = React.useState(false);
+  const [pronto, setPronto] = React.useState(false);
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
 
@@ -88,11 +86,14 @@ const FormEquipment = () => {
           onChangeText={newBrand => setBrand(newBrand)}
           defaultValue={brand}
         />
-        <RadioButton.Group
-          onValueChange={value => setChecked(value)}
-          value={checked}>
-          <RadioButton.Item label="Pronto" value="first" />
-        </RadioButton.Group>
+        <View style={styles1.checkboxContainer}>
+          <CheckBox
+            style={styles1.checkbox}
+            value={pronto}
+            onValueChange={value => setPronto(value)}
+          />
+          <Text style={styles1.label}>Aparelho pronto!</Text>
+        </View>
         <View style={styles1.checkboxContainer}>
           <CheckBox
             style={styles1.checkbox}
@@ -101,6 +102,15 @@ const FormEquipment = () => {
           />
           <Text style={styles1.label}>Aparelho entregue!</Text>
         </View>
+        <View style={styles1.checkboxContainer}>
+          <CheckBox
+            style={styles1.checkbox}
+            value={autorizado}
+            onValueChange={value => setAutorizado(value)}
+          />
+          <Text style={styles1.label}>Aparelho autorizado!</Text>
+        </View>
+
         <Button title="Enviar" onPress={createClient} />
       </SafeAreaView>
     </>
