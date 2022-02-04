@@ -130,11 +130,27 @@ const FormEquipment = ({route}) => {
           <Text style={styles1.label}>Aparelho autorizado!</Text>
         </View>
 
-        <Button title="Enviar" onPress={createClient} />
+        <View style={{marginVertical: 10}}>
+          <Button title="Enviar" onPress={createClient} />
+        </View>
+        <View style={{marginVertical: 10}}>
+          <Button
+            style={stylesButton}
+            title="Mostrar lista de equipamento"
+            onPress={createClient}
+          />
+        </View>
       </SafeAreaView>
     </>
   );
 };
+
+const stylesButton = StyleSheet.create({
+  button: {
+    marginBottom: 20,
+    padding: 30,
+  },
+});
 
 const styles1 = StyleSheet.create({
   container: {
