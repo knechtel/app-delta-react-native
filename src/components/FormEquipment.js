@@ -5,7 +5,7 @@ import CheckBox from '@react-native-community/checkbox';
 
 import axios from 'axios';
 
-import {CREATE_CLIENT, CREATE_EQUIPMENT} from '../util/urls';
+import {CREATE_CLIENT, CREATE_EQUIPMENT, FIND_BY_ID_CLIENT} from '../util/urls';
 
 const FormEquipment = ({route}) => {
   console.log(route.params.paramKey);
@@ -18,6 +18,24 @@ const FormEquipment = ({route}) => {
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
 
+  const findClient = async id => {
+    const response = await fetch(FIND_BY_ID_CLIENT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    });
+
+    const json = await response.json();
+
+    setName(json.name);
+    setEmail(json.email);
+    setCpf(json.cpf);
+  };
+  findClient(route.params.paramKey);
   const createClient = async () => {
     var idClient;
     var aparelhoEntregue = null;

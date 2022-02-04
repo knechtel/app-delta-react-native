@@ -23,6 +23,10 @@ class ClientList extends Component {
     const {navigation} = this.props;
     navigation.navigate('FormEquipment', {paramKey: 1});
   };
+  redirectToEdit = id => {
+    const {navigation} = this.props;
+    navigation.navigate('FormEquipment', {paramKey: id});
+  };
   _onRefresh = () => {
     this.setState({refreshing: true});
     axios.get(FIND_ALL_CLIENT).then(response => {
@@ -45,7 +49,7 @@ class ClientList extends Component {
   alertItemName = item => {
     alert(item.name);
     this.setState({refreshing: false});
-    this.redirectToHome();
+    this.redirectToEdit(item.id);
   };
   render() {
     return (
