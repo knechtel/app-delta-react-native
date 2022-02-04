@@ -7,7 +7,6 @@ import {
   RefreshControl,
   Button,
 } from 'react-native';
-import {FAB} from 'react-native-elements';
 
 import axios from 'axios';
 import {FIND_ALL_CLIENT} from '../util/urls';
@@ -22,7 +21,7 @@ class ClientList extends Component {
   }
   redirectToHome = () => {
     const {navigation} = this.props;
-    navigation.navigate('FormEquipment');
+    navigation.navigate('FormEquipment', {paramKey: 1});
   };
   _onRefresh = () => {
     this.setState({refreshing: true});

@@ -7,7 +7,8 @@ import axios from 'axios';
 
 import {CREATE_CLIENT, CREATE_EQUIPMENT} from '../util/urls';
 
-const FormEquipment = () => {
+const FormEquipment = ({route}) => {
+  console.log(route.params.paramKey);
   const [name, setName] = React.useState();
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
