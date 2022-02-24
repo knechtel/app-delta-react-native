@@ -21,8 +21,7 @@ const FormEquipment = ({route}) => {
     console.log('passei aqui.');
     // const {navigation} = this.props;
     // console.log('chamei funcao');
-    const {navigation} = this.props;
-  };
+  }
   const findClient = async id => {
     const response = await fetch(FIND_BY_ID_CLIENT, {
       method: 'POST',
