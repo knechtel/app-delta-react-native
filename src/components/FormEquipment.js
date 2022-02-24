@@ -2,26 +2,28 @@ import React from 'react';
 import {StyleSheet, TextInput, Text, View, Alert} from 'react-native';
 import {Button, SafeAreaView} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-
+import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 
 import {CREATE_CLIENT, CREATE_EQUIPMENT, FIND_BY_ID_CLIENT} from '../util/urls';
 
-const FormEquipment = ({route}) => {
+const FormEquipment = ({route, navigate}) => {
   console.log(route.params.paramKey);
   const [name, setName] = React.useState();
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
-
+  const navigation = useNavigation();
   const [brand, setBrand] = React.useState();
   const [pronto, setPronto] = React.useState(false);
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
   const test = () => {
     console.log('passei aqui.');
+
+    navigation.navigate('clientList');
     // const {navigation} = this.props;
     // console.log('chamei funcao');
-  }
+  };
   const findClient = async id => {
     const response = await fetch(FIND_BY_ID_CLIENT, {
       method: 'POST',
