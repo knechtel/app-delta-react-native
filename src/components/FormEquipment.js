@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TextInput, Text, View} from 'react-native';
+import {StyleSheet, TextInput, Text, View, Alert} from 'react-native';
 import {Button, SafeAreaView} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
@@ -17,7 +17,12 @@ const FormEquipment = ({route}) => {
   const [pronto, setPronto] = React.useState(false);
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
-
+  const test = () => {
+    console.log('passei aqui.');
+    // const {navigation} = this.props;
+    // console.log('chamei funcao');
+    const {navigation} = this.props;
+  };
   const findClient = async id => {
     const response = await fetch(FIND_BY_ID_CLIENT, {
       method: 'POST',
@@ -137,7 +142,7 @@ const FormEquipment = ({route}) => {
           <Button
             style={stylesButton}
             title="Mostrar lista de equipamento"
-            onPress={createClient}
+            onPress={() => test()}
           />
         </View>
       </SafeAreaView>

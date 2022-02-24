@@ -11,7 +11,7 @@ import ClientList from './components/ClientList';
 import FormEquipment from './components/FormEquipment';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import ListEquipment from './components/ListEquipment';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +30,11 @@ const App = () => {
           <Stack.Screen
             name="FormEquipment"
             component={FormEquipment}
+            options={{title: 'Cadastrar Equipamento'}}
+          />
+          <Stack.Screen
+            name="ListEquipment"
+            component={ListEquipment}
             options={{title: 'Cadastrar Equipamento'}}
           />
         </Stack.Navigator>
