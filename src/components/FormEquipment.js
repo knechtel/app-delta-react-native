@@ -20,7 +20,7 @@ const FormEquipment = ({route, navigate}) => {
   const test = () => {
     console.log('passei aqui.');
 
-    navigation.navigate('ListEquipment');
+    navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
     // const {navigation} = this.props;
     // console.log('chamei funcao');
   };

@@ -7,8 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import axios from 'axios';
-
 import {FIND_ALL_EQUIPMENT_BY_CLIENT} from '../util/urls';
+
 class ListEquipment extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +18,10 @@ class ListEquipment extends Component {
     };
   }
   componentDidMount() {
+    const {navigation, route} = this.props;
     axios
       .post(FIND_ALL_EQUIPMENT_BY_CLIENT, {
-        id: 3,
+        id: route.params.paramKey,
       })
       .then(response => {
         console.log(response.data.listEquipment);
