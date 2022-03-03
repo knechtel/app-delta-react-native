@@ -12,7 +12,7 @@ import FormEquipment from './components/FormEquipment';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ListEquipment from './components/ListEquipment';
-
+import FormOnlyEquipment from './components/FormOnlyEquipment';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -35,6 +35,11 @@ const App = () => {
           <Stack.Screen
             name="ListEquipment"
             component={ListEquipment}
+            options={{title: 'Cadastrar Equipamento'}}
+          />
+          <Stack.Screen
+            name="FormOnlyEquipment"
+            component={FormOnlyEquipment}
             options={{title: 'Cadastrar Equipamento'}}
           />
         </Stack.Navigator>

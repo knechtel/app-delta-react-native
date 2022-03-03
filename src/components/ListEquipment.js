@@ -17,6 +17,19 @@ class ListEquipment extends Component {
       refreshing: false,
     };
   }
+
+  redirectToEdit = id => {
+    const {navigation} = this.props;
+    navigation.navigate('FormOnlyEquipment', {paramKey: id});
+  };
+
+  alertItemName = item => {
+    alert(item.name);
+    this.setState({refreshing: false});
+    console.log('Item id abaixo:');
+    console.log(item.id);
+    this.redirectToEdit(item.id);
+  };
   componentDidMount() {
     const {navigation, route} = this.props;
     axios
