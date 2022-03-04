@@ -8,6 +8,9 @@ class FormOnlyEquipment extends Component {
     console.log('doChamada()');
     console.log(route.params.paramKey);
   }
+  saveEquipment = () => {
+    console.log('mais um teste');
+  };
   render() {
     const {state} = this;
     const setSerial = serial => this.setState(serial);
@@ -34,6 +37,8 @@ class FormOnlyEquipment extends Component {
             onChangeText={defeito => setDefeito(defeito)}
             defaultValue={state.defeito}
           />
+
+          <Button title="Enviar" onPress={this.saveEquipment} />
         </SafeAreaView>
       </>
     );
