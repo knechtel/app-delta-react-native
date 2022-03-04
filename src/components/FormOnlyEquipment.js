@@ -3,7 +3,13 @@ import {Button, SafeAreaView, TextInput, StyleSheet, View} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {Text} from 'react-native';
 class FormOnlyEquipment extends Component {
-  state = {serial: 'hello world', model: '', defeito: '', pronto: false};
+  state = {
+    serial: 'hello world',
+    model: '',
+    defeito: '',
+    pronto: false,
+    autorizado: false,
+  };
   componentDidMount() {
     const {navigation, route} = this.props;
     console.log('doChamada()');
@@ -18,6 +24,7 @@ class FormOnlyEquipment extends Component {
     const setModel = model => this.setState(model);
     const setDefeito = defeito => this.setState(defeito);
     const setPronto = pronto => this.setState(pronto);
+    const setAutorizado = autorizado => this.setState(autorizado);
     return (
       <>
         <SafeAreaView>
@@ -46,6 +53,14 @@ class FormOnlyEquipment extends Component {
               onValueChange={value => setPronto(value)}
             />
             <Text style={styles1.label}>Aparelho pronto!</Text>
+          </View>
+          <View style={styles1.checkboxContainer}>
+            <CheckBox
+              style={styles1.checkbox}
+              value={this.autorizado}
+              onValueChange={value => setAutorizado(value)}
+            />
+            <Text style={styles1.label}>Aparelho autorizado!</Text>
           </View>
           <Button title="Enviar" onPress={this.saveEquipment} />
         </SafeAreaView>
