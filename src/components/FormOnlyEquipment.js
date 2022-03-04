@@ -9,6 +9,7 @@ class FormOnlyEquipment extends Component {
     defeito: '',
     pronto: false,
     autorizado: false,
+    entregue: false,
   };
   componentDidMount() {
     const {navigation, route} = this.props;
@@ -25,6 +26,7 @@ class FormOnlyEquipment extends Component {
     const setDefeito = defeito => this.setState(defeito);
     const setPronto = pronto => this.setState(pronto);
     const setAutorizado = autorizado => this.setState(autorizado);
+    const setEntregue = entregue => this.setState(entregue);
     return (
       <>
         <SafeAreaView>
@@ -61,6 +63,14 @@ class FormOnlyEquipment extends Component {
               onValueChange={value => setAutorizado(value)}
             />
             <Text style={styles1.label}>Aparelho autorizado!</Text>
+          </View>
+          <View style={styles1.checkboxContainer}>
+            <CheckBox
+              style={styles1.checkbox}
+              value={this.entregue}
+              onValueChange={value => setEntregue(value)}
+            />
+            <Text style={styles1.label}>Aparelho entregue!</Text>
           </View>
           <Button title="Enviar" onPress={this.saveEquipment} />
         </SafeAreaView>
