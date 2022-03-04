@@ -9,14 +9,10 @@ class FormOnlyEquipment extends Component {
     console.log(route.params.paramKey);
   }
   render() {
-    // const [serial, setSerial] = useState();
-    // const [model, setModel] = useState();
-    // const [defeito, setDefeito] = useState();
-
     const {state} = this;
     const setSerial = serial => this.setState(serial);
     const setModel = model => this.setState(model);
-    const defeito = defeito => this.setState(defeito);
+    const setDefeito = defeito => this.setState(defeito);
     return (
       <>
         <SafeAreaView>
