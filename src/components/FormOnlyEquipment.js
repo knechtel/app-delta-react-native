@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Button, SafeAreaView, TextInput, StyleSheet, View} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {Text} from 'react-native';
+import axios from 'axios';
+import {FIND_BY_ID_EQUIPMENT} from '../util/urls';
 class FormOnlyEquipment extends Component {
   state = {
     serial: 'hello world',
@@ -27,6 +29,17 @@ class FormOnlyEquipment extends Component {
     const setPronto = pronto => this.setState(pronto);
     const setAutorizado = autorizado => this.setState(autorizado);
     const setEntregue = entregue => this.setState(entregue);
+    const {navigation, route} = this.props;
+    axios
+      .post(FIND_BY_ID_EQUIPMENT, {
+        id: route.params.paramKey,
+      })
+      .then(response => {
+        console.log(response.data.listEquipment);
+        this.setState({
+          model: response.data.model,
+        });
+      });
     return (
       <>
         <SafeAreaView>
