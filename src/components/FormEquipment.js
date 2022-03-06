@@ -18,12 +18,9 @@ const FormEquipment = ({route, navigate}) => {
   const [pronto, setPronto] = React.useState(false);
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
-  const listEquipment = () => {
-    console.log('passei aqui.');
 
+  const listEquipment = () => {
     navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
-    // const {navigation} = this.props;
-    // console.log('chamei funcao');
   };
   const findClient = async id => {
     const response = await fetch(FIND_BY_ID_CLIENT, {
