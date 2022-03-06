@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 
 import {CREATE_CLIENT, CREATE_EQUIPMENT, FIND_BY_ID_CLIENT} from '../util/urls';
+import ListEquipment from './ListEquipment';
 
 const FormEquipment = ({route, navigate}) => {
   console.log(route.params.paramKey);
@@ -17,7 +18,7 @@ const FormEquipment = ({route, navigate}) => {
   const [pronto, setPronto] = React.useState(false);
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
-  const test = () => {
+  const listEquipment = () => {
     console.log('passei aqui.');
 
     navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
@@ -143,7 +144,7 @@ const FormEquipment = ({route, navigate}) => {
           <Button
             style={stylesButton}
             title="Mostrar lista de equipamento"
-            onPress={() => test()}
+            onPress={() => listEquipment()}
           />
         </View>
       </SafeAreaView>
