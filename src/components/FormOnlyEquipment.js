@@ -29,7 +29,7 @@ class FormOnlyEquipment extends Component {
     const setPronto = pronto => this.setState(pronto);
     const setAutorizado = autorizado => this.setState(autorizado);
     const setEntregue = entregue => this.setState(entregue);
-    const {navigation, route} = this.props;
+    const {route} = this.props;
     axios
       .post(FIND_BY_ID_EQUIPMENT, {
         id: route.params.paramKey,
