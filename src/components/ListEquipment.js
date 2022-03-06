@@ -48,7 +48,7 @@ class ListEquipment extends Component {
   render() {
     return (
       <>
-        <Text>Aparelho entregue!</Text>
+        <Text>Aparelho do cliente _</Text>
         <ScrollView
           refreshControl={
             <RefreshControl
