@@ -11,6 +11,7 @@ import ListEquipment from './ListEquipment';
 const FormEquipment = ({route, navigate}) => {
   console.log(route.params.paramKey);
   const [name, setName] = React.useState();
+  const [id, setId] = React.useState();
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
   const navigation = useNavigation();
@@ -23,6 +24,7 @@ const FormEquipment = ({route, navigate}) => {
     navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const findClient = async id => {
+    console.log('Meu deus estou aqui tonight!!!');
     const response = await fetch(FIND_BY_ID_CLIENT, {
       method: 'POST',
       headers: {
@@ -34,50 +36,57 @@ const FormEquipment = ({route, navigate}) => {
     });
 
     const json = await response.json();
+    console.log('Meu deus estou aqui **********!!!');
+    console.log('Meu deus estou aqui **********123!!!' + json.name);
 
     setName(json.name);
     setEmail(json.email);
     setCpf(json.cpf);
+    setId(json.id);
+    console.log('Olhar aquiiiiii');
+    console.log(json.id);
   };
   findClient(route.params.paramKey);
   const createClient = async () => {
-    var idClient;
-    var aparelhoEntregue = null;
-    if (entregue == true) {
-      const d = new Date();
-      d.getTime();
-      aparelhoEntregue = d.toISOString().substring(0, 10);
-    }
-    console.log('Valor esperado =  ' + entregue);
-    await axios({
-      method: 'post',
-      url: CREATE_CLIENT,
-      headers: {
-        'Content-type': 'application/json',
-      },
-      data: {
-        name: name,
-        email: email,
-        cpf: cpf,
-      },
-    }).then(response => {
-      idClient = response.data.id;
-      console.log('idClient  = ' + idClient + ' entregue ' + aparelhoEntregue);
-    });
+    var idClient = id;
+    // var aparelhoEntregue = null;
+    // if (entregue == true) {
+    //   const d = new Date();
+    //   d.getTime();
+    //   aparelhoEntregue = d.toISOString().substring(0, 10);
+    // }
+    // console.log('Valor esperado =  ' + entregue);
+    // await axios({
+    //   method: 'post',
+    //   url: CREATE_CLIENT,
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //   },
+    //   data: {
+    //     name: name,
+    //     email: email,
+    //     cpf: cpf,
+    //   },
+    // }).then(response => {
+    //   idClient = response.data.id;
+    //   console.log('idClient  = ' + idClient + ' entregue ' + aparelhoEntregue);
+    // });
 
-    await axios({
-      method: 'post',
-      url: CREATE_EQUIPMENT,
-      headers: {
-        'Content-type': 'application/json',
-      },
-      data: {
-        idClient: idClient,
-        brand: brand,
-        entregue: aparelhoEntregue,
-      },
-    });
-  };
+    // await axios({
+    //   method: 'post',
+    //   url: CREATE_EQUIPMENT,
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //   },
+    //   data: {
+    //     idClient: idClient,
+    //     brand: brand,
+    //     entregue: aparelhoEntregue,
+    //   },
+    // });
+
+    console.log('Maiquel passei aqui...' + idClient);
+  };;
   return (
     <>
       <SafeAreaView>
