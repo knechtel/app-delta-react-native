@@ -40,12 +40,14 @@ const FormEquipment = ({route, navigate}) => {
     console.log('Meu deus estou aqui **********!!!');
     console.log('Meu deus estou aqui **********123!!!' + json.name);
 
-    setName(json.name);
-    setEmail(json.email);
-    setCpf(json.cpf);
-    setId(json.id);
-    console.log('Olhar aquiiiiii');
-    console.log(json.id);
+    if (json.id != null) {
+      setName(json.name);
+      setEmail(json.email);
+      setCpf(json.cpf);
+      setId(json.id);
+      console.log('Olhar aquiiiiii');
+      console.log(json.id);
+    }
   };
   findClient(route.params.paramKey);
   const createClient = async () => {
@@ -95,7 +97,7 @@ const FormEquipment = ({route, navigate}) => {
           style={styles.input}
           placeholder="Nome"
           value={name}
-          onChangeText={newName => setName(newName)}
+          onChangeText={name => setName(name)}
           defaultValue={name}
         />
         <TextInput
