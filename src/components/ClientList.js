@@ -21,7 +21,7 @@ class ClientList extends Component {
   }
   redirectToHome = () => {
     const {navigation} = this.props;
-    navigation.navigate('FormEquipment', {paramKey: 1}, navigation);
+    navigation.navigate('FormEquipment', {paramKey: 0}, navigation);
   };
   redirectToEdit = id => {
     const {navigation} = this.props;
