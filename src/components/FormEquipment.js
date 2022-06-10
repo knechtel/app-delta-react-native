@@ -25,7 +25,8 @@ const FormEquipment = ({route, navigate}) => {
     navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const findClient = async id => {
-    console.log('Meu deus estou aqui tonight!!!');
+    console.log('Meu deus estou aqui !!!' + id);
+
     const response = await fetch(FIND_BY_ID_CLIENT, {
       method: 'POST',
       headers: {
@@ -40,7 +41,7 @@ const FormEquipment = ({route, navigate}) => {
     console.log('Meu deus estou aqui **********!!!');
     console.log('Meu deus estou aqui **********123!!!' + json.name);
 
-    if (json.id != null) {
+    if (json.id != null || json.id != 0) {
       setName(json.name);
       setEmail(json.email);
       setCpf(json.cpf);
@@ -52,28 +53,28 @@ const FormEquipment = ({route, navigate}) => {
   findClient(route.params.paramKey);
   const createClient = async () => {
     var idClient = id;
-    // var aparelhoEntregue = null;
-    // if (entregue == true) {
-    //   const d = new Date();
-    //   d.getTime();
-    //   aparelhoEntregue = d.toISOString().substring(0, 10);
-    // }
-    // console.log('Valor esperado =  ' + entregue);
-    // await axios({
-    //   method: 'post',
-    //   url: CREATE_CLIENT,
-    //   headers: {
-    //     'Content-type': 'application/json',
-    //   },
-    //   data: {
-    //     name: name,
-    //     email: email,
-    //     cpf: cpf,
-    //   },
-    // }).then(response => {
-    //   idClient = response.data.id;
-    //   console.log('idClient  = ' + idClient + ' entregue ' + aparelhoEntregue);
-    // });
+    var aparelhoEntregue = null;
+    if (entregue == true) {
+      const d = new Date();
+      d.getTime();
+      aparelhoEntregue = d.toISOString().substring(0, 10);
+    }
+    console.log('Valor esperado =  ' + entregue);
+    await axios({
+      method: 'post',
+      url: CREATE_CLIENT,
+      headers: {
+        'Content-type': 'application/json',
+      },
+      data: {
+        name: name,
+        email: email,
+        cpf: cpf,
+      },
+    }).then(response => {
+      idClient = response.data.id;
+      console.log('idClient  = ' + idClient + ' entregue ' + aparelhoEntregue);
+    });
 
     // await axios({
     //   method: 'post',
