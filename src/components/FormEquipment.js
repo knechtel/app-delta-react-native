@@ -14,6 +14,7 @@ const FormEquipment = ({route, navigate}) => {
   const [id, setId] = React.useState();
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
+  const [preco, setPreco] = React.useState();
   const navigation = useNavigation();
   const [brand, setBrand] = React.useState();
   const [pronto, setPronto] = React.useState(false);
@@ -86,7 +87,7 @@ const FormEquipment = ({route, navigate}) => {
     // });
 
     console.log('Maiquel passei aqui...' + idClient);
-  };;
+  };
   return (
     <>
       <SafeAreaView>
@@ -117,6 +118,13 @@ const FormEquipment = ({route, navigate}) => {
           placeholder="Marca"
           onChangeText={newBrand => setBrand(newBrand)}
           defaultValue={brand}
+        />
+        <TextInput
+          style={styles.input}
+          value={preco}
+          placeholder="Preco"
+          onChangeText={preco => setPreco(preco)}
+          defaultValue={preco}
         />
         <View style={styles1.checkboxContainer}>
           <CheckBox
