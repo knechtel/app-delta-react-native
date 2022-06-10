@@ -44,8 +44,6 @@ const App = () => {
           />
         </Stack.Navigator>
       </NavigationContainer>
-
-      {/*{flagComponent ? <ClientList /> : <FormEquipment />} */}
     </>
   );
 };
