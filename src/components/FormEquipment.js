@@ -105,6 +105,7 @@ const FormEquipment = ({route, navigate}) => {
         model: '',
       },
     });
+    alert('Cadastro realizado com sucesso!');
   };
   return (
     <>
