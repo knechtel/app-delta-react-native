@@ -38,10 +38,10 @@ const FormEquipment = ({route, navigate}) => {
     });
 
     const json = await response.json();
-    console.log('Meu deus estou aqui **********!!!');
+    console.log('Meu deus estou aqui **********!!!' + json.id);
     console.log('Meu deus estou aqui **********123!!!' + json.name);
 
-    if (json.id != null || json.id != 0) {
+    if (json.id != null && json.id != 0) {
       setName(json.name);
       setEmail(json.email);
       setCpf(json.cpf);
