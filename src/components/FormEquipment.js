@@ -62,7 +62,6 @@ const FormEquipment = ({route, navigate}) => {
       const jsonEquipment = await responseT.json();
       setBrand(jsonEquipment.brand);
       setDefeito(jsonEquipment.defect_for_repair);
-      console.log('MAIQUEL ' + jsonEquipment.brand);
     }
   };
   findClient(route.params.paramKey);
