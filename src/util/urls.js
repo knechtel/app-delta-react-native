@@ -1,4 +1,4 @@
-export const CREATE_CLIENT = `http://10.0.0.199:5000/client-create`;
+export const CREATE_CLIENT = `http://10.0.0.199:5000/client-findAll`;
 export const FIND_BY_ID_CLIENT = `http://10.0.0.199:5000/client-findById`;
 export const FIND_ALL_EQUIPMENT_BY_CLIENT = `http://10.0.0.199:8080/client-findByAllEquipment`;
 export const FIND_BY_ID_EQUIPMENT = `http://10.0.0.199:8080/equipment-findById`;
