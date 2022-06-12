@@ -5,7 +5,12 @@ import CheckBox from '@react-native-community/checkbox';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 
-import {CREATE_CLIENT, CREATE_EQUIPMENT, FIND_BY_ID_CLIENT} from '../util/urls';
+import {
+  CREATE_CLIENT,
+  CREATE_EQUIPMENT,
+  FIND_BY_ID_CLIENT,
+  FIND_EQUIPMENT_BY_CLIENT,
+} from '../util/urls';
 import ListEquipment from './ListEquipment';
 
 const FormEquipment = ({route, navigate}) => {
@@ -43,6 +48,21 @@ const FormEquipment = ({route, navigate}) => {
       setEmail(json.email);
       setCpf(json.cpf);
       setId(json.id);
+
+      const responseT = await fetch(FIND_EQUIPMENT_BY_CLIENT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: id,
+        }),
+      });
+
+      const jsonEquipment = await responseT.json();
+      setBrand(jsonEquipment.brand);
+      setDefeito(jsonEquipment.defect_for_repair);
+      console.log('MAIQUEL ' + jsonEquipment.brand);
     }
   };
   findClient(route.params.paramKey);
