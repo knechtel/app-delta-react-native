@@ -25,8 +25,6 @@ const FormEquipment = ({route, navigate}) => {
     navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const findClient = async id => {
-    console.log('Meu deus estou aqui !!!' + id);
-
     const response = await fetch(FIND_BY_ID_CLIENT, {
       method: 'POST',
       headers: {
@@ -38,16 +36,12 @@ const FormEquipment = ({route, navigate}) => {
     });
 
     const json = await response.json();
-    console.log('Meu deus estou aqui **********!!!' + json.id);
-    console.log('Meu deus estou aqui **********123!!!' + json.name);
 
     if (json.id != null && json.id != 0) {
       setName(json.name);
       setEmail(json.email);
       setCpf(json.cpf);
       setId(json.id);
-      console.log('Olhar aquiiiiii');
-      console.log(json.id);
     }
   };
   findClient(route.params.paramKey);
@@ -59,7 +53,7 @@ const FormEquipment = ({route, navigate}) => {
       d.getTime();
       aparelhoEntregue = d.toISOString().substring(0, 10);
     }
-    console.log('Valor esperado =  ' + entregue);
+
     await axios({
       method: 'post',
       url: CREATE_CLIENT,
@@ -88,8 +82,6 @@ const FormEquipment = ({route, navigate}) => {
     //     entregue: aparelhoEntregue,
     //   },
     // });
-
-    console.log('Maiquel passei aqui...' + idClient);
   };
   return (
     <>
@@ -167,7 +159,7 @@ const FormEquipment = ({route, navigate}) => {
       </SafeAreaView>
     </>
   );
-};
+};;;
 
 const stylesButton = StyleSheet.create({
   button: {
