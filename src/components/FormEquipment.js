@@ -70,18 +70,18 @@ const FormEquipment = ({route, navigate}) => {
       console.log('idClient  = ' + idClient + ' entregue ' + aparelhoEntregue);
     });
 
-    // await axios({
-    //   method: 'post',
-    //   url: CREATE_EQUIPMENT,
-    //   headers: {
-    //     'Content-type': 'application/json',
-    //   },
-    //   data: {
-    //     idClient: idClient,
-    //     brand: brand,
-    //     entregue: aparelhoEntregue,
-    //   },
-    // });
+    await axios({
+      method: 'post',
+      url: CREATE_EQUIPMENT,
+      headers: {
+        'Content-type': 'application/json',
+      },
+      data: {
+        idClient: idClient,
+        brand: brand,
+        entregue: aparelhoEntregue,
+      },
+    });
   };
   return (
     <>
