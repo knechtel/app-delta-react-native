@@ -15,6 +15,7 @@ const FormEquipment = ({route, navigate}) => {
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
   const [preco, setPreco] = React.useState();
+  const [defect_for_repair, setDefeito] = React.useState();
   const navigation = useNavigation();
   const [brand, setBrand] = React.useState();
   const [pronto, setPronto] = React.useState(false);
@@ -80,6 +81,9 @@ const FormEquipment = ({route, navigate}) => {
         idClient: idClient,
         brand: brand,
         entregue: aparelhoEntregue,
+        defect_for_repair: defect_for_repair,
+        preco: preco,
+        model: '',
       },
     });
   };
@@ -120,6 +124,13 @@ const FormEquipment = ({route, navigate}) => {
           placeholder="Preco"
           onChangeText={preco => setPreco(preco)}
           defaultValue={preco}
+        />
+        <TextInput
+          style={styles.input}
+          value={defect_for_repair}
+          placeholder="Defeito"
+          onChangeText={defect_for_repair => setDefeito(defect_for_repair)}
+          defaultValue={defect_for_repair}
         />
         <View style={styles1.checkboxContainer}>
           <CheckBox
