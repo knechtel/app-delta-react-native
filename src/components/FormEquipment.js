@@ -105,6 +105,12 @@ const FormEquipment = ({route, navigate}) => {
         model: '',
       },
     });
+    setName('');
+    setEmail('');
+    setBrand('');
+    setCpf('');
+    setPreco('');
+    setDefeito('');
     alert('Cadastro realizado com sucesso!');
   };
   return (
