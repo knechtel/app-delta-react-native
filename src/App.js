@@ -13,6 +13,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ListEquipment from './components/ListEquipment';
 import FormOnlyEquipment from './components/FormOnlyEquipment';
+import FiltroComponent from './components/FiltroComponent';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -23,7 +24,12 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="clientList"
+            name="filtroComponent"
+            component={FiltroComponent}
+            options={{title: 'Eletrônica Delta'}}
+          />
+          <Stack.Screen
+            name="ClientList"
             component={ClientList}
             options={{title: 'Eletrônica Delta'}}
           />
