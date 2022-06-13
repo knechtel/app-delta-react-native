@@ -12,6 +12,7 @@ import {
   FIND_EQUIPMENT_BY_CLIENT,
 } from '../util/urls';
 import ListEquipment from './ListEquipment';
+import {useEffect} from 'react';
 
 const FormEquipment = ({route, navigate}) => {
   console.log(route.params.paramKey);
@@ -66,7 +67,11 @@ const FormEquipment = ({route, navigate}) => {
       setDefeito(jsonEquipment.defect_for_repair);
     }
   };
-  findClient(route.params.paramKey);
+  useEffect(() => {
+    console.log('I have been mounted');
+    findClient(route.params.paramKey);
+  }, [route.params.paramKey]);
+  // findClient(route.params.paramKey);
   const createClient = async () => {
     var idClient = id;
     var aparelhoEntregue = null;
@@ -206,7 +211,7 @@ const FormEquipment = ({route, navigate}) => {
       </ScrollView>
     </>
   );
-};
+};;;;;;;
 
 const stylesButton = StyleSheet.create({
   button: {
