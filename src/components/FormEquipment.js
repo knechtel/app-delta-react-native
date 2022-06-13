@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TextInput, Text, View, Alert} from 'react-native';
-import {Button, SafeAreaView} from 'react-native';
+import {Button, ScrollView} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
@@ -30,7 +30,7 @@ const FormEquipment = ({route, navigate}) => {
   const [entregue, setEntregue] = React.useState(false);
 
   const listEquipment = () => {
-    navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
+    // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const findClient = async id => {
     const response = await fetch(FIND_BY_ID_CLIENT, {
@@ -50,7 +50,7 @@ const FormEquipment = ({route, navigate}) => {
       setEmail(json.email);
       setCpf(json.cpf);
       setId(json.id);
-
+      setTelefone(json.telefone);
       const responseT = await fetch(FIND_EQUIPMENT_BY_CLIENT, {
         method: 'POST',
         headers: {
@@ -86,6 +86,7 @@ const FormEquipment = ({route, navigate}) => {
         name: name,
         email: email,
         cpf: cpf,
+        telefone: telefone,
       },
     }).then(response => {
       idClient = response.data.id;
@@ -111,13 +112,14 @@ const FormEquipment = ({route, navigate}) => {
     setEmail('');
     setBrand('');
     setCpf('');
+    setTelefone('');
     setPreco('');
     setDefeito('');
     alert('Cadastro realizado com sucesso!');
   };
   return (
     <>
-      <SafeAreaView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <TextInput
           style={styles.input}
           placeholder="Nome"
@@ -201,7 +203,7 @@ const FormEquipment = ({route, navigate}) => {
             onPress={() => listEquipment()}
           />
         </View>
-      </SafeAreaView>
+      </ScrollView>
     </>
   );
 };
