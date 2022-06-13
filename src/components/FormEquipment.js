@@ -16,12 +16,14 @@ import ListEquipment from './ListEquipment';
 const FormEquipment = ({route, navigate}) => {
   console.log(route.params.paramKey);
   const [name, setName] = React.useState();
+  const [telefone, setTelefone] = React.useState();
   const [id, setId] = React.useState();
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
   const [preco, setPreco] = React.useState();
   const [defect_for_repair, setDefeito] = React.useState();
   const navigation = useNavigation();
+  const [equipamento, setEquipamento] = React.useState();
   const [brand, setBrand] = React.useState();
   const [pronto, setPronto] = React.useState(false);
   const [autorizado, setAutorizado] = React.useState(false);
@@ -125,6 +127,13 @@ const FormEquipment = ({route, navigate}) => {
         />
         <TextInput
           style={styles.input}
+          value={telefone}
+          placeholder="Telefone"
+          onChangeText={telefone => setTelefone(telefone)}
+          defaultValue={telefone}
+        />
+        <TextInput
+          style={styles.input}
           value={email}
           placeholder="Email"
           onChangeText={newEmail => setEmail(newEmail)}
@@ -143,6 +152,13 @@ const FormEquipment = ({route, navigate}) => {
           placeholder="Marca"
           onChangeText={newBrand => setBrand(newBrand)}
           defaultValue={brand}
+        />
+        <TextInput
+          style={styles.input}
+          value={equipamento}
+          placeholder="Equipamento"
+          onChangeText={equipamento => setEquipamento(equipamento)}
+          defaultValue={equipamento}
         />
         <TextInput
           style={styles.input}
@@ -174,14 +190,6 @@ const FormEquipment = ({route, navigate}) => {
           />
           <Text style={styles1.label}>Aparelho entregue!</Text>
         </View>
-        <View style={styles1.checkboxContainer}>
-          <CheckBox
-            style={styles1.checkbox}
-            value={autorizado}
-            onValueChange={value => setAutorizado(value)}
-          />
-          <Text style={styles1.label}>Aparelho autorizado!</Text>
-        </View>
 
         <View style={{marginVertical: 10}}>
           <Button title="Enviar" onPress={createClient} />
@@ -196,7 +204,7 @@ const FormEquipment = ({route, navigate}) => {
       </SafeAreaView>
     </>
   );
-};;;
+};
 
 const stylesButton = StyleSheet.create({
   button: {
