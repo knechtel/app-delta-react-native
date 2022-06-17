@@ -10,6 +10,7 @@ import {
   CREATE_EQUIPMENT,
   FIND_BY_ID_CLIENT,
   FIND_EQUIPMENT_BY_CLIENT,
+  UPDATE_CLIENT,
 } from '../util/urls';
 import ListEquipment from './ListEquipment';
 import {useEffect} from 'react';
@@ -81,46 +82,73 @@ const FormEquipment = ({route, navigate}) => {
       aparelhoEntregue = d.toISOString().substring(0, 10);
     }
 
-    await axios({
-      method: 'post',
-      url: CREATE_CLIENT,
-      headers: {
-        'Content-type': 'application/json',
-      },
-      data: {
-        name: name,
-        email: email,
-        cpf: cpf,
-        telefone: telefone,
-      },
-    }).then(response => {
-      idClient = response.data.id;
-      console.log('idClient  = ' + idClient + ' entregue ' + aparelhoEntregue);
-    });
+    //if com opcao de edicao
+    if (id != null && id != 0) {
+      await axios({
+        method: 'post',
+        url: UPDATE_CLIENT,
+        headers: {
+          'Content-type': 'application/json',
+        },
+        data: {
+          id: id,
+          name: name,
+          email: email,
+          cpf: cpf,
+          telefone: telefone,
+        },
+      }).then(response => {
+        idClient = response.data.id;
+        console.log(
+          'idClient  = ' + idClient + ' entregue ' + aparelhoEntregue,
+        );
+      });
+      alert('Formulário editado com sucesso!');
+    } else {
+      //se nao cria cliente
+      await axios({
+        method: 'post',
+        url: CREATE_CLIENT,
+        headers: {
+          'Content-type': 'application/json',
+        },
+        data: {
+          name: name,
+          email: email,
+          cpf: cpf,
+          telefone: telefone,
+        },
+      }).then(response => {
+        idClient = response.data.id;
+        console.log(
+          'idClient  = ' + idClient + ' entregue ' + aparelhoEntregue,
+        );
+      });
 
-    await axios({
-      method: 'post',
-      url: CREATE_EQUIPMENT,
-      headers: {
-        'Content-type': 'application/json',
-      },
-      data: {
-        idClient: idClient,
-        brand: brand,
-        entregue: aparelhoEntregue,
-        defect_for_repair: defect_for_repair,
-        preco: preco,
-        model: '',
-      },
-    });
-    setName('');
-    setEmail('');
-    setBrand('');
-    setCpf('');
-    setTelefone('');
-    setPreco('');
-    setDefeito('');
-    alert('Cadastro realizado com sucesso!');
+      await axios({
+        method: 'post',
+        url: CREATE_EQUIPMENT,
+        headers: {
+          'Content-type': 'application/json',
+        },
+        data: {
+          idClient: idClient,
+          brand: brand,
+          entregue: aparelhoEntregue,
+          defect_for_repair: defect_for_repair,
+          preco: preco,
+          model: '',
+        },
+      });
+      setName('');
+      setEmail('');
+      setBrand('');
+      setCpf('');
+      setTelefone('');
+      setPreco('');
+      setDefeito('');
+      alert('Cadastro realizado com sucesso!');
+    }
   };
   return (
     <>
