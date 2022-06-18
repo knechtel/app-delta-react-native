@@ -12,6 +12,7 @@ import {
   FIND_EQUIPMENT_BY_CLIENT,
   UPDATE_CLIENT,
 } from '../util/urls';
+import {createNewClient, createNewEquipment} from '../actions/create';
 import ListEquipment from './ListEquipment';
 import {useEffect} from 'react';
 
@@ -68,9 +69,11 @@ const FormEquipment = ({route, navigate}) => {
       setDefeito(jsonEquipment.defect_for_repair);
     }
   };
+
   useEffect(() => {
     console.log('I have been mounted');
-    findClient(route.params.paramKey);
+    if (route.params.paramKey != 0 && route.params.paramKey != null)
+      findClient(route.params.paramKey);
   }, [route.params.paramKey]);
   // findClient(route.params.paramKey);
   const createClient = async () => {
@@ -106,40 +109,15 @@ const FormEquipment = ({route, navigate}) => {
       alert('Formulário editado com sucesso!');
     } else {
       //se nao cria cliente
-      await axios({
-        method: 'post',
-        url: CREATE_CLIENT,
-        headers: {
-          'Content-type': 'application/json',
-        },
-        data: {
-          name: name,
-          email: email,
-          cpf: cpf,
-          telefone: telefone,
-        },
-      }).then(response => {
-        idClient = response.data.id;
-        console.log(
-          'idClient  = ' + idClient + ' entregue ' + aparelhoEntregue,
-        );
-      });
-
-      await axios({
-        method: 'post',
-        url: CREATE_EQUIPMENT,
-        headers: {
-          'Content-type': 'application/json',
-        },
-        data: {
-          idClient: idClient,
-          brand: brand,
-          entregue: aparelhoEntregue,
-          defect_for_repair: defect_for_repair,
-          preco: preco,
-          model: '',
-        },
-      });
+      idClient = await createNewClient(name, email, cpf, telefone);
+      await createNewEquipment(
+        idClient,
+        brand,
+        entregue,
+        defect_for_repair,
+        preco,
+        aparelhoEntregue,
+      );
       setName('');
       setEmail('');
       setBrand('');
