@@ -60,6 +60,7 @@ const FormEquipment = ({route, navigate}) => {
       setCpf(json.cpf);
       setId(json.id);
       setTelefone(json.telefone);
+
       const responseT = await fetch(FIND_EQUIPMENT_BY_CLIENT, {
         method: 'POST',
         headers: {
@@ -74,6 +75,14 @@ const FormEquipment = ({route, navigate}) => {
       setIdEquipment(jsonEquipment.id);
       setBrand(jsonEquipment.brand);
       setDefeito(jsonEquipment.defect_for_repair);
+
+      console.log('aquiii maiquel');
+      var valor = jsonEquipment.cost_value;
+      valor = valor.replace('0000000000', '');
+      valor = valor.replace('.', '');
+      console.log(jsonEquipment.cost_value);
+      console.log(valor);
+      setPreco(valor);
     }
   };
 
@@ -173,7 +182,7 @@ const FormEquipment = ({route, navigate}) => {
           style={styles.input}
           value={preco}
           placeholder="Preco"
-          onChangeText={preco => setPreco(preco)}
+          onChangeText={newPreco => setPreco(newPreco)}
           defaultValue={preco}
         />
         <TextInput
@@ -213,7 +222,7 @@ const FormEquipment = ({route, navigate}) => {
       </ScrollView>
     </>
   );
-};;;;;;;
+};
 
 const stylesButton = StyleSheet.create({
   button: {
