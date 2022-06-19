@@ -16,7 +16,7 @@ import {
   createNewClient,
   createNewEquipment,
   updateCliente,
-} from '../actions/create';
+} from '../actions/callApi';
 import ListEquipment from './ListEquipment';
 import {useEffect} from 'react';
 
