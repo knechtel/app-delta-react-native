@@ -1,4 +1,9 @@
-import {CREATE_EQUIPMENT, CREATE_CLIENT, UPDATE_CLIENT} from '../util/urls';
+import {
+  CREATE_EQUIPMENT,
+  CREATE_CLIENT,
+  UPDATE_CLIENT,
+  UPDATE_EQUIPMENT,
+} from '../util/urls';
 import axios from 'axios';
 async function createNewClient(name, email, cpf, telefone) {
   var idClient;
@@ -68,4 +73,32 @@ async function updateCliente(id, name, email, cpf, telefone) {
   alert('Formulário editado com sucesso!');
   return idClient;
 }
-export {createNewClient, createNewEquipment, updateCliente};
+async function updateEquipment(
+  id,
+  brand,
+  entregue,
+  defect_for_repair,
+  preco,
+  aparelhoEntregue,
+) {
+  await axios({
+    method: 'post',
+    url: UPDATE_EQUIPMENT,
+    headers: {
+      'Content-type': 'application/json',
+    },
+    data: {
+      id: id,
+      brand: brand,
+      entregue: entregue,
+      defect_for_repair: defect_for_repair,
+      cost_value: preco,
+      model: '',
+      serial: '',
+    },
+  }).then(response => {
+    console.log();
+  });
+}
+
+export {createNewClient, createNewEquipment, updateCliente, updateEquipment};

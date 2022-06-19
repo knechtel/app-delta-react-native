@@ -16,6 +16,7 @@ import {
   createNewClient,
   createNewEquipment,
   updateCliente,
+  updateEquipment,
 } from '../actions/callApi';
 import ListEquipment from './ListEquipment';
 import {useEffect} from 'react';
@@ -25,6 +26,7 @@ const FormEquipment = ({route, navigate}) => {
   const [name, setName] = React.useState();
   const [telefone, setTelefone] = React.useState();
   const [id, setId] = React.useState();
+  const [idEquipment, setIdEquipment] = React.useState();
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
   const [preco, setPreco] = React.useState();
@@ -69,6 +71,7 @@ const FormEquipment = ({route, navigate}) => {
       });
 
       const jsonEquipment = await responseT.json();
+      setIdEquipment(jsonEquipment.id);
       setBrand(jsonEquipment.brand);
       setDefeito(jsonEquipment.defect_for_repair);
     }
@@ -92,6 +95,14 @@ const FormEquipment = ({route, navigate}) => {
     //if com opcao de edicao
     if (id != null && id != 0) {
       idClient = await updateCliente(id, name, email, cpf, telefone);
+      await updateEquipment(
+        idEquipment,
+        brand,
+        entregue,
+        defect_for_repair,
+        preco,
+        aparelhoEntregue,
+      );
     } else {
       //se nao cria cliente
       idClient = await createNewClient(name, email, cpf, telefone);
