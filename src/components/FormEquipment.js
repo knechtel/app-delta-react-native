@@ -12,7 +12,11 @@ import {
   FIND_EQUIPMENT_BY_CLIENT,
   UPDATE_CLIENT,
 } from '../util/urls';
-import {createNewClient, createNewEquipment} from '../actions/create';
+import {
+  createNewClient,
+  createNewEquipment,
+  updateCliente,
+} from '../actions/create';
 import ListEquipment from './ListEquipment';
 import {useEffect} from 'react';
 
@@ -87,26 +91,7 @@ const FormEquipment = ({route, navigate}) => {
 
     //if com opcao de edicao
     if (id != null && id != 0) {
-      await axios({
-        method: 'post',
-        url: UPDATE_CLIENT,
-        headers: {
-          'Content-type': 'application/json',
-        },
-        data: {
-          id: id,
-          name: name,
-          email: email,
-          cpf: cpf,
-          telefone: telefone,
-        },
-      }).then(response => {
-        idClient = response.data.id;
-        console.log(
-          'idClient  = ' + idClient + ' entregue ' + aparelhoEntregue,
-        );
-      });
-      alert('Formulário editado com sucesso!');
+      idClient = await updateCliente(id, name, email, cpf, telefone);
     } else {
       //se nao cria cliente
       idClient = await createNewClient(name, email, cpf, telefone);
