@@ -75,7 +75,9 @@ const FormEquipment = ({route, navigate}) => {
       setIdEquipment(jsonEquipment.id);
       setBrand(jsonEquipment.brand);
       setDefeito(jsonEquipment.defect_for_repair);
-
+      setEquipamento(jsonEquipment.model);
+      setPronto(jsonEquipment.pronto);
+      setEntregue(jsonEquipment.entregue);
       console.log('aquiii maiquel');
       var valor = jsonEquipment.cost_value;
       valor = valor.replace('0000000000', '');
@@ -104,6 +106,8 @@ const FormEquipment = ({route, navigate}) => {
     //if com opcao de edicao
     if (id != null && id != 0) {
       idClient = await updateCliente(id, name, email, cpf, telefone);
+      console.log('valor de pronto ------- ');
+      console.log(pronto);
       await updateEquipment(
         idEquipment,
         brand,
@@ -111,6 +115,8 @@ const FormEquipment = ({route, navigate}) => {
         defect_for_repair,
         preco,
         aparelhoEntregue,
+        equipamento,
+        pronto,
       );
     } else {
       //se nao cria cliente
@@ -122,6 +128,7 @@ const FormEquipment = ({route, navigate}) => {
         defect_for_repair,
         preco,
         aparelhoEntregue,
+        equipamento,
       );
       setName('');
       setEmail('');
@@ -130,6 +137,9 @@ const FormEquipment = ({route, navigate}) => {
       setTelefone('');
       setPreco('');
       setDefeito('');
+      setEquipamento('');
+      setEntregue(false);
+      setPronto(false);
       alert('Cadastro realizado com sucesso!');
     }
   };
@@ -138,12 +148,14 @@ const FormEquipment = ({route, navigate}) => {
       <ScrollView keyboardShouldPersistTaps="always">
         <TextInput
           style={styles.input}
+          editable={!entregue}
           placeholder="Nome"
           value={name}
           onChangeText={name => setName(name)}
           defaultValue={name}
         />
         <TextInput
+          editable={!entregue}
           style={styles.input}
           value={telefone}
           placeholder="Telefone"
@@ -151,20 +163,23 @@ const FormEquipment = ({route, navigate}) => {
           defaultValue={telefone}
         />
         <TextInput
+          editable={!entregue}
           style={styles.input}
           value={email}
           placeholder="Email"
-          onChangeText={newEmail => setEmail(newEmail)}
+          onChangeText={email => setEmail(email)}
           defaultValue={email}
         />
         <TextInput
+          editable={!entregue}
           style={styles.input}
           value={cpf}
           placeholder="Cpf"
-          onChangeText={newCpf => setCpf(newCpf)}
+          onChangeText={cpf => setCpf(cpf)}
           defaultValue={cpf}
         />
         <TextInput
+          editable={!entregue}
           style={styles.input}
           value={brand}
           placeholder="Marca"
@@ -172,6 +187,7 @@ const FormEquipment = ({route, navigate}) => {
           defaultValue={brand}
         />
         <TextInput
+          editable={!entregue}
           style={styles.input}
           value={equipamento}
           placeholder="Equipamento"
@@ -179,6 +195,7 @@ const FormEquipment = ({route, navigate}) => {
           defaultValue={equipamento}
         />
         <TextInput
+          editable={!entregue}
           style={styles.input}
           value={preco}
           placeholder="Preco"
@@ -186,6 +203,7 @@ const FormEquipment = ({route, navigate}) => {
           defaultValue={preco}
         />
         <TextInput
+          editable={!entregue}
           style={styles.input}
           value={defect_for_repair}
           placeholder="Defeito"
@@ -194,6 +212,7 @@ const FormEquipment = ({route, navigate}) => {
         />
         <View style={styles1.checkboxContainer}>
           <CheckBox
+            editable={!entregue}
             style={styles1.checkbox}
             value={pronto}
             onValueChange={value => setPronto(value)}
@@ -202,6 +221,7 @@ const FormEquipment = ({route, navigate}) => {
         </View>
         <View style={styles1.checkboxContainer}>
           <CheckBox
+            editable={!entregue}
             style={styles1.checkbox}
             value={entregue}
             onValueChange={value => setEntregue(value)}
@@ -214,6 +234,7 @@ const FormEquipment = ({route, navigate}) => {
         </View>
         <View style={{marginVertical: 10}}>
           <Button
+            disabled={entregue}
             style={stylesButton}
             title="Mostrar lista de equipamento"
             onPress={() => listEquipment()}

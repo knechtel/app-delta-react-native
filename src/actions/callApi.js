@@ -33,6 +33,7 @@ async function createNewEquipment(
   defect_for_repair,
   preco,
   aparelhoEntregue,
+  equipamento,
 ) {
   await axios({
     method: 'post',
@@ -46,7 +47,7 @@ async function createNewEquipment(
       entregue: aparelhoEntregue,
       defect_for_repair: defect_for_repair,
       preco: preco,
-      model: '',
+      model: equipamento,
     },
   });
 }
@@ -80,6 +81,8 @@ async function updateEquipment(
   defect_for_repair,
   preco,
   aparelhoEntregue,
+  equipamento,
+  pronto,
 ) {
   await axios({
     method: 'post',
@@ -93,8 +96,9 @@ async function updateEquipment(
       entregue: entregue,
       defect_for_repair: defect_for_repair,
       cost_value: preco,
-      model: '',
+      model: equipamento,
       serial: '',
+      pronto: pronto,
     },
   }).then(response => {
     console.log();
