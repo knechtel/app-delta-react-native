@@ -29,7 +29,7 @@ class ClientListById extends Component {
   };
   _onRefresh = () => {
     this.setState({refreshing: true});
-    axios.post(FIND_BY_ID_CLIENT).then(response => {
+    axios.get(FIND_ALL_CLIENT).then(response => {
       this.setState({
         client: response.data,
       });
@@ -39,6 +39,8 @@ class ClientListById extends Component {
   };
 
   componentDidMount() {
+    console.log('componentDidMount');
+    console.log(this.props.route.params);
     axios.get(FIND_ALL_CLIENT).then(response => {
       this.setState({
         client: response.data,
