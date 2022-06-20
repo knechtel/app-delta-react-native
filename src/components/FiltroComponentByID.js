@@ -28,7 +28,7 @@ const FiltroComponentByID = ({navigation}) => {
     console.log('eu');
     console.log(id);
 
-    navigation.navigate('ClientListById', {paramKey: id});
+    navigation.navigate('FormEquipment', {paramKey: id});
   };
 
   return (

@@ -15,7 +15,7 @@ class ClientListById extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      client: [],
+      client: {},
       refreshing: false,
     };
   }
@@ -29,7 +29,7 @@ class ClientListById extends Component {
   };
   _onRefresh = () => {
     this.setState({refreshing: true});
-    axios.get(FIND_ALL_CLIENT).then(response => {
+    axios.get(FIND_BY_ID_CLIENT).then(response => {
       this.setState({
         client: response.data,
       });
@@ -38,15 +38,27 @@ class ClientListById extends Component {
     });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    console.log('componentDidMount1234');
     console.log('componentDidMount');
-    console.log(this.props.route.params);
-    axios.get(FIND_ALL_CLIENT).then(response => {
-      this.setState({
-        client: response.data,
-      });
-      console.log(response.data);
+    var valor = this.props.route.params;
+
+    await axios({
+      method: 'post',
+      url: FIND_BY_ID_CLIENT,
+      headers: {
+        'Content-type': 'application/json',
+      },
+      data: {id: Number(valor)},
+    }).then(response => {
+      console.log(response.data.cpf);
     });
+    // axios.post(FIND_BY_ID_CLIENT, {id: valor}).then(response => {
+    //   this.setState({
+    //     client: response.data,
+    //   });
+    //   console.log(response.data);
+    // });
   }
   alertItemName = item => {
     alert(item.name);
@@ -63,16 +75,14 @@ class ClientListById extends Component {
               onRefresh={this._onRefresh}
             />
           }>
-          {this.state.client.map((item, index) => (
-            <TouchableOpacity
-              key={item.id}
-              style={styles.container}
-              onPress={() => this.alertItemName(item)}>
-              <Text style={styles.text}>
-                {item.name} - {item.id}{' '}
-              </Text>
-            </TouchableOpacity>
-          ))}
+          <TouchableOpacity
+            key={this.state.client.id}
+            style={styles.container}
+            onPress={() => this.alertItemName(this.state.client)}>
+            <Text style={styles.text}>
+              {this.state.client.name} - {this.state.client.id}{' '}
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
         <Button
           onPress={this.redirectToHome}
