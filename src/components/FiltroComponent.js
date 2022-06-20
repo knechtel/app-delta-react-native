@@ -10,6 +10,11 @@ import axios from 'axios';
 import {FIND_ALL_EQUIPMENT_BY_CLIENT} from '../util/urls';
 
 class FiltroComponent extends Component {
+  test = () => {
+    const {navigation} = this.props;
+    navigation.navigate('filtroComponentByID');
+  };
+
   listClient = () => {
     const {navigation} = this.props;
     navigation.navigate('ClientList');
@@ -29,10 +34,7 @@ class FiltroComponent extends Component {
             />
           </View>
           <View style={{marginVertical: 10}}>
-            <Button
-              title="por numero de os "
-              onPress={() => this.listClient()}
-            />
+            <Button title="por numero de os " onPress={() => this.test()} />
           </View>
         </ScrollView>
       </>
