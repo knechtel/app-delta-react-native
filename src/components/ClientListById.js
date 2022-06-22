@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import {FIND_ALL_CLIENT, FIND_BY_ID_CLIENT} from '../util/urls';
 
 const ClientListById = () => {
-  const [clientList1, setClientList1] = React.useState([
-    {name: 'Maiquel', id: 1},
-  ]);
+  const [clientList1, setClientList1] = React.useState([]);
+  const navigation = useNavigation();
   const [name, setName] = React.useState();
   const route = useRoute();
   //var client = {id: 1, name: 'maiquel'};
@@ -23,7 +23,14 @@ const ClientListById = () => {
   const _onRefresh = (name1, id1) => {
     console.log('');
   };
+  const redirectToEdit = id => {
+    navigation.navigate('FormEquipment', {paramKey: id});
+  };
+  const alertItemName = item => {
+    alert(item.name);
 
+    redirectToEdit(item.id);
+  };
   useEffect(() => {
     console.log('I have been mounted');
     const params1 = route.params.id;
@@ -86,7 +93,10 @@ const ClientListById = () => {
           />
         }>
         {clientList1.map((item, index) => (
-          <TouchableOpacity key={item.id} style={styles.container}>
+          <TouchableOpacity
+            key={item.id}
+            style={styles.container}
+            onPress={() => alertItemName(item)}>
             <Text style={styles.text}>
               {item.name} - {item.id}{' '}
             </Text>
