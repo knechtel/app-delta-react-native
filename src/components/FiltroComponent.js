@@ -10,11 +10,15 @@ import axios from 'axios';
 import {FIND_ALL_EQUIPMENT_BY_CLIENT} from '../util/urls';
 
 class FiltroComponent extends Component {
-  test = () => {
+  numeroOS = () => {
     const {navigation} = this.props;
     navigation.navigate('filtroComponentByID');
   };
-
+  dataEntrada = () => {
+    const {navigation} = this.props;
+    navigation.navigate('FiltroComponentDataEntrada');
+    console.log('ola');
+  };
   listClient = () => {
     const {navigation} = this.props;
     navigation.navigate('ClientList');
@@ -34,7 +38,13 @@ class FiltroComponent extends Component {
             />
           </View>
           <View style={{marginVertical: 10}}>
-            <Button title="por numero de os " onPress={() => this.test()} />
+            <Button title="por numero de os " onPress={() => this.numeroOS()} />
+          </View>
+          <View style={{marginVertical: 10}}>
+            <Button
+              title="por data de entrada "
+              onPress={() => this.dataEntrada()}
+            />
           </View>
         </ScrollView>
       </>

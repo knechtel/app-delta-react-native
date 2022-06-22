@@ -7,51 +7,44 @@ import {
   RefreshControl,
   Button,
 } from 'react-native';
-
+import {useRoute} from '@react-navigation/native';
+import {useEffect} from 'react';
 import axios from 'axios';
 import {FIND_ALL_CLIENT, FIND_BY_ID_CLIENT} from '../util/urls';
 
-class ClientListById extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      client: {},
-      refreshing: false,
-    };
-  }
-  redirectToHome = () => {
-    const {navigation} = this.props;
-    navigation.navigate('FormEquipment', {paramKey: 0}, navigation);
-  };
-  redirectToEdit = id => {
-    const {navigation} = this.props;
-    navigation.navigate('FormEquipment', {paramKey: id});
-  };
-  _onRefresh = () => {
-    this.setState({refreshing: true});
-    axios.get(FIND_BY_ID_CLIENT).then(response => {
-      this.setState({
-        client: response.data,
-      });
-      this.setState({refreshing: false});
-      console.log(response.data);
-    });
+const ClientListById = () => {
+  const [clientList1, setClientList1] = React.useState([
+    {name: 'Maiquel', id: 1},
+  ]);
+  const [name, setName] = React.useState();
+  const route = useRoute();
+  //var client = {id: 1, name: 'maiquel'};
+
+  const _onRefresh = (name1, id1) => {
+    console.log('');
   };
 
-  async componentDidMount() {
+  useEffect(() => {
+    console.log('I have been mounted');
+    const params1 = route.params.id;
     console.log('componentDidMount1234');
     console.log('componentDidMount');
-    var valor = this.props.route.params;
 
-    await axios({
+    console.log('valor = ' + params1);
+    axios({
       method: 'post',
       url: FIND_BY_ID_CLIENT,
       headers: {
         'Content-type': 'application/json',
       },
-      data: {id: Number(valor)},
+      data: {id: Number(params1)},
     }).then(response => {
       console.log(response.data.cpf);
+      setClientList1([
+        {name: 'Maiquel', id: 1},
+        {name: 'Mateus', id: 2},
+      ]);
+      //doIt(response.data.id, response.data.name);
     });
     // axios.post(FIND_BY_ID_CLIENT, {id: valor}).then(response => {
     //   this.setState({
@@ -59,40 +52,58 @@ class ClientListById extends Component {
     //   });
     //   console.log(response.data);
     // });
-  }
-  alertItemName = item => {
-    alert(item.name);
-    this.setState({refreshing: false});
-    this.redirectToEdit(item.id);
-  };
-  render() {
-    return (
-      <>
-        <ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }>
-          <TouchableOpacity
-            key={this.state.client.id}
-            style={styles.container}
-            onPress={() => this.alertItemName(this.state.client)}>
+  }, [route.params.id]);
+
+  // redirectToHome = () => {
+  //   const {navigation} = this.props;
+  //   navigation.navigate('FormEquipment', {paramKey: 0}, navigation);
+  // };
+  // redirectToEdit = id => {
+  //   const {navigation} = this.props;
+  //   navigation.navigate('FormEquipment', {paramKey: id});
+  // };
+
+  // //   console.log("maiqul")
+  //   //   // this.setState({refreshing: true});
+  //   //   // axios.get(FIND_BY_ID_CLIENT).then(response => {
+  //   //   //   this.setState({
+  //   //   //     client: response.data,
+  //   //   //   });
+  //   //   //   this.setState({refreshing: false});
+  //   //   //   console.log(response.data);
+  //   //   // });
+  // };
+  // alertItemName = item => {
+  //   alert(item.name);
+  //   this.setState({refreshing: false});
+  //   this.redirectToEdit(item.id);
+  // };
+
+  return (
+    <>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={this._onRefreshing}
+            onRefresh={this._onRefresh}
+          />
+        }>
+        {clientList1.map((item, index) => (
+          <TouchableOpacity key={item.id} style={styles.container}>
             <Text style={styles.text}>
-              {this.state.client.name} - {this.state.client.id}{' '}
+              {item.name} - {item.id}{' '}
             </Text>
           </TouchableOpacity>
-        </ScrollView>
-        <Button
-          onPress={this.redirectToHome}
-          title="Adicionar equipamento"
-          color="#841584"
-        />
-      </>
-    );
-  }
-}
+        ))}
+      </ScrollView>
+      <Button
+        onPress={this.redirectToHome}
+        title="Adicionar equipamento"
+        color="#841584"
+      />
+    </>
+  );
+};
 
 export default ClientListById;
 
