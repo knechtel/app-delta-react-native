@@ -39,11 +39,8 @@ const ClientListById = () => {
       },
       data: {id: Number(params1)},
     }).then(response => {
-      console.log(response.data.cpf);
-      setClientList1([
-        {name: 'Maiquel', id: 1},
-        {name: 'Mateus', id: 2},
-      ]);
+      console.log(response.data);
+      setClientList1([response.data]);
       //doIt(response.data.id, response.data.name);
     });
     // axios.post(FIND_BY_ID_CLIENT, {id: valor}).then(response => {
