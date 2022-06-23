@@ -13,7 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import {FIND_ALL_CLIENT, FIND_BY_ID_CLIENT} from '../util/urls';
 
-const ClientListById = () => {
+const ClientListByDataEntrada = () => {
   const [clientList1, setClientList1] = React.useState([]);
   const navigation = useNavigation();
   const [name, setName] = React.useState();
@@ -112,7 +112,7 @@ const ClientListById = () => {
   );
 };
 
-export default ClientListById;
+export default ClientListByDataEntrada;
 
 const styles = StyleSheet.create({
   container: {
