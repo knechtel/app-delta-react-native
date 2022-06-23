@@ -11,10 +11,15 @@ import {useRoute} from '@react-navigation/native';
 import {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
-import {FIND_ALL_CLIENT, FIND_BY_ID_CLIENT} from '../util/urls';
+import {
+  FIND_ALL_CLIENT,
+  FIND_BY_ID_CLIENT,
+  EQUIPMENT_FIND_DATA_ENTRADA,
+} from '../util/urls';
 
 const ClientListByDataEntrada = () => {
   const [clientList1, setClientList1] = React.useState([]);
+  const [clientId, setClientId] = React.useState();
   const navigation = useNavigation();
   const [name, setName] = React.useState();
   const route = useRoute();
@@ -33,30 +38,52 @@ const ClientListByDataEntrada = () => {
   };
   useEffect(() => {
     console.log('I have been mounted');
-    const params1 = route.params.id;
+
+    const params2 = route.params.data_entrada;
     console.log('componentDidMount1234');
     console.log('componentDidMount');
 
-    console.log('valor = ' + params1);
+    //console.log('valor = ' + params1);
+
     axios({
       method: 'post',
-      url: FIND_BY_ID_CLIENT,
+      url: EQUIPMENT_FIND_DATA_ENTRADA,
       headers: {
         'Content-type': 'application/json',
       },
-      data: {id: Number(params1)},
-    }).then(response => {
-      console.log(response.data);
-      setClientList1([response.data]);
+      data: {data_entrada: params2},
+    }).then(response1 => {
       //doIt(response.data.id, response.data.name);
+      console.log('response1  -  ');
+      console.log(response1.data);
+      console.log('foi');
+      for (let i = 0; i < response1.data.length; i++) {
+        console.log(response1.data[i].client_id);
+        console.log('end');
+        setClientId(response1.data.client_id);
+
+        axios({
+          method: 'post',
+          url: FIND_BY_ID_CLIENT,
+          headers: {
+            'Content-type': 'application/json',
+          },
+          data: {id: Number(response1.data[i].client_id)},
+        }).then(response => {
+          console.log(response.data);
+          setClientList1([response.data]);
+          //doIt(response.data.id, response.data.name);
+        });
+      }
     });
+
     // axios.post(FIND_BY_ID_CLIENT, {id: valor}).then(response => {
     //   this.setState({
     //     client: response.data,
     //   });
     //   console.log(response.data);
     // });
-  }, [route.params.id]);
+  }, [route.params.data_entrada, clientId]);
 
   // redirectToHome = () => {
   //   const {navigation} = this.props;

@@ -29,7 +29,7 @@ const FiltroComponentDataEntrada = () => {
     console.log('eu');
     console.log(id);
 
-    navigation.navigate('ClientListByDataEntrada', {id: id});
+    navigation.navigate('ClientListByDataEntrada', {data_entrada: id});
   };
 
   return (
