@@ -48,6 +48,7 @@ async function createNewEquipment(
       defect_for_repair: defect_for_repair,
       preco: preco,
       model: equipamento,
+      pronto: false,
     },
   });
 }
