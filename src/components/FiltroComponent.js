@@ -1,13 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, Button} from 'react-native';
-import {
-  ScrollView,
-  TouchableOpacity,
-  RefreshControl,
-  StyleSheet,
-} from 'react-native';
-import axios from 'axios';
-import {FIND_ALL_EQUIPMENT_BY_CLIENT} from '../util/urls';
+import {ScrollView, StyleSheet} from 'react-native';
 
 class FiltroComponent extends Component {
   numeroOS = () => {
