@@ -32,12 +32,6 @@ class FiltroComponent extends Component {
             <Button title="All Clients" onPress={() => this.listClient()} />
           </View>
           <View style={{marginVertical: 10}}>
-            <Button
-              title="Todas os por data de entrada"
-              onPress={() => this.listClient()}
-            />
-          </View>
-          <View style={{marginVertical: 10}}>
             <Button title="por numero de os " onPress={() => this.numeroOS()} />
           </View>
           <View style={{marginVertical: 10}}>
