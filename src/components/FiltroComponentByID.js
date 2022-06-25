@@ -1,33 +1,11 @@
 import React from 'react';
-import {StyleSheet, TextInput, Text, View, Alert} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 import {Button, ScrollView} from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
-import {useNavigation} from '@react-navigation/native';
-import axios from 'axios';
-
-import {
-  CREATE_CLIENT,
-  CREATE_EQUIPMENT,
-  FIND_BY_ID_CLIENT,
-  FIND_EQUIPMENT_BY_CLIENT,
-  UPDATE_CLIENT,
-} from '../util/urls';
-import {
-  createNewClient,
-  createNewEquipment,
-  updateCliente,
-  updateEquipment,
-} from '../actions/callApi';
-import ListEquipment from './ListEquipment';
-import {useEffect} from 'react';
 
 const FiltroComponentByID = ({navigation}) => {
   const [id, setId] = React.useState();
 
   const callId = () => {
-    console.log('eu');
-    console.log(id);
-
     navigation.navigate('FormEquipment', {paramKey: id});
   };
 
@@ -49,31 +27,6 @@ const FiltroComponentByID = ({navigation}) => {
     </>
   );
 };
-
-const stylesButton = StyleSheet.create({
-  button: {
-    marginBottom: 20,
-    padding: 30,
-  },
-});
-
-const styles1 = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    marginBottom: 20,
-  },
-  checkbox: {
-    alignSelf: 'center',
-  },
-  label: {
-    margin: 8,
-  },
-});
 
 const styles = StyleSheet.create({
   sectionContainer: {
