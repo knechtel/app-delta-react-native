@@ -54,7 +54,7 @@ const FormEquipment = ({route, navigate}) => {
 
     const json = await response.json();
 
-    if (json.id != null && json.id != 0) {
+    if (json.id !== null && json.id !== 0) {
       setName(json.name);
       setEmail(json.email);
       setCpf(json.cpf);
@@ -72,24 +72,30 @@ const FormEquipment = ({route, navigate}) => {
       });
 
       const jsonEquipment = await responseT.json();
-      setIdEquipment(jsonEquipment.id);
-      setBrand(jsonEquipment.brand);
-      setDefeito(jsonEquipment.defect_for_repair);
-      setEquipamento(jsonEquipment.model);
-      setPronto(jsonEquipment.pronto);
-      setEntregue(jsonEquipment.entregue);
-      console.log('aquiii maiquel');
-      var valor = jsonEquipment.cost_value;
-      valor = valor.replace('0000000000', '');
-      valor = valor.replace('.', '');
-      console.log(jsonEquipment.cost_value);
-      console.log(valor);
-      setPreco(valor);
+      console.log('puxa equipamento ' + jsonEquipment.id);
+      if (typeof jsonEquipment.id === 'undefined') {
+        console.log('NULLL');
+      } else {
+        console.log('NAO NULLL');
+        setIdEquipment(jsonEquipment.id);
+        setBrand(jsonEquipment.brand);
+        setDefeito(jsonEquipment.defect_for_repair);
+        setEquipamento(jsonEquipment.model);
+        setPronto(jsonEquipment.pronto);
+        setEntregue(jsonEquipment.entregue);
+        console.log('aquiii maiquel');
+        var valor = jsonEquipment.cost_value;
+        valor = valor.replace('0000000000', '');
+        valor = valor.replace('.', '');
+        console.log(jsonEquipment.cost_value);
+        console.log(valor);
+        setPreco(valor);
+      }
     }
   };
 
   useEffect(() => {
-    console.log('I have been mounted');
+    console.log('I have been mounted  -- ' + route.params.paramKey);
     if (route.params.paramKey != 0 && route.params.paramKey != null)
       findClient(route.params.paramKey);
   }, [route.params.paramKey]);
@@ -104,20 +110,24 @@ const FormEquipment = ({route, navigate}) => {
     }
 
     //if com opcao de edicao
-    if (id != null && id != 0) {
+    if (id !== null && id !== 0) {
       idClient = await updateCliente(id, name, email, cpf, telefone);
       console.log('valor de pronto ------- ');
       console.log(pronto);
-      await updateEquipment(
-        idEquipment,
-        brand,
-        entregue,
-        defect_for_repair,
-        preco,
-        aparelhoEntregue,
-        equipamento,
-        pronto,
-      );
+      console.log('valor de id ---- ' + id);
+      if (idEquipment !== null && idEquipment !== 0) {
+        //TODO CRIA EQUIPAMENTO SE NAO TEM
+        await updateEquipment(
+          idEquipment,
+          brand,
+          entregue,
+          defect_for_repair,
+          preco,
+          aparelhoEntregue,
+          equipamento,
+          pronto,
+        );
+      }
     } else {
       //se nao cria cliente
       idClient = await createNewClient(name, email, cpf, telefone);

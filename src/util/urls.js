@@ -11,3 +11,4 @@ export const UPDATE_EQUIPMENT = `http://10.0.0.199:5000/api/equipment-update`;
 export const EDIT_CLIENT_URL = 'http://localhost:3000/edit/';
 export const EQUIPMENT_FIND_DATA_ENTRADA = `http://10.0.0.199:5000/api/equipment-findByDataEntrada`;
 export const FIND_ALL_CLIENT = 'http://10.0.0.199:5000/api/client-findAll';
+export const PDF_BY_ID = 'http://10.0.0.199:5000/download?id=';

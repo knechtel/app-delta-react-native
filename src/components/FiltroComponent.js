@@ -1,8 +1,18 @@
 import React, {Component} from 'react';
 import {Text, View, Button} from 'react-native';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Linking} from 'react-native';
+import {PDF_BY_ID} from '../util/urls';
 
 class FiltroComponent extends Component {
+  handleClick = id => {
+    Linking.canOpenURL(PDF_BY_ID + id).then(supported => {
+      if (supported) {
+        Linking.openURL(PDF_BY_ID + id);
+      } else {
+        console.log("Don't know how to open URI: ");
+      }
+    });
+  };
   numeroOS = () => {
     const {navigation} = this.props;
     navigation.navigate('filtroComponentByID');
@@ -32,6 +42,9 @@ class FiltroComponent extends Component {
               title="por data de entrada "
               onPress={() => this.dataEntrada()}
             />
+          </View>
+          <View style={{marginVertical: 10}}>
+            <Button title="PDF" onPress={() => this.numeroOS()} />
           </View>
         </ScrollView>
       </>
