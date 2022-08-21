@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TextInput, Text, View, Alert} from 'react-native';
+import {StyleSheet, TextInput, Text, View, Alert, Linking} from 'react-native';
 import {Button, ScrollView} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {useNavigation} from '@react-navigation/native';
@@ -38,7 +38,39 @@ const FormEquipment = ({route, navigate}) => {
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
 
+  const [edit, setEdit] = React.useState(false);
+  const savePhoto = () => {
+    Linking.canOpenURL('http://10.0.0.199:5000/upOs?id=' + id).then(
+      supported => {
+        if (supported) {
+          Linking.openURL('http://10.0.0.199:5000/upOs?id=' + id);
+        } else {
+          console.log("Don't know how to open URI: ");
+        }
+      },
+    );
+    // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
+  };
+  const loadPhoto = () => {
+    Linking.canOpenURL('http://10.0.0.199:5000/img/' + id + '.jpeg').then(
+      supported => {
+        if (supported) {
+          Linking.openURL('http://10.0.0.199:5000/img/' + id + '.jpeg');
+        } else {
+          console.log("Don't know how to open URI: ");
+        }
+      },
+    );
+    // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
+  };
+  const setProntoValue = () => {
+    setPronto(true);
+    setEdit(true);
+    // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
+  };
   const listEquipment = () => {
+    setEntregue(true);
+    setEdit(true);
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const findClient = async id => {
@@ -83,10 +115,15 @@ const FormEquipment = ({route, navigate}) => {
         setEquipamento(jsonEquipment.model);
         setPronto(jsonEquipment.pronto);
         setEntregue(jsonEquipment.entregue);
-        console.log('aquiii maiquel');
+
         var valor = jsonEquipment.cost_value;
-        valor = valor.replace('0000000000', '');
-        valor = valor.replace('.', '');
+        console.log('aquiii maiquel: ' + valor);
+        if (valor === '0E-10') {
+          valor = '0';
+        } else {
+          valor = valor.replace('0000000000', '');
+          valor = valor.replace('.', '');
+        }
         console.log(jsonEquipment.cost_value);
         console.log(valor);
         setPreco(valor);
@@ -108,9 +145,9 @@ const FormEquipment = ({route, navigate}) => {
       d.getTime();
       aparelhoEntregue = d.toISOString().substring(0, 10);
     }
-
+    console.log('este é o id --> ' + id);
     //if com opcao de edicao
-    if (id !== null && id !== 0) {
+    if (id !== null && id !== 0 && typeof id !== 'undefined') {
       idClient = await updateCliente(id, name, email, cpf, telefone);
       console.log('valor de pronto ------- ');
       console.log(pronto);
@@ -130,27 +167,56 @@ const FormEquipment = ({route, navigate}) => {
       }
     } else {
       //se nao cria cliente
-      idClient = await createNewClient(name, email, cpf, telefone);
-      await createNewEquipment(
-        idClient,
-        brand,
-        entregue,
-        defect_for_repair,
-        preco,
-        aparelhoEntregue,
-        equipamento,
-      );
-      setName('');
-      setEmail('');
-      setBrand('');
-      setCpf('');
-      setTelefone('');
-      setPreco('');
-      setDefeito('');
-      setEquipamento('');
-      setEntregue(false);
-      setPronto(false);
-      alert('Cadastro realizado com sucesso!');
+      console.log('MMMMMMMMMMM');
+      console.log(defect_for_repair);
+      if (typeof cpf === 'undefined' || cpf === '') {
+        setCpf('cpf nao definido');
+        console.log('Entrou aquiiiii ...');
+      }
+      if (typeof email === 'undefined' || email === '') {
+        setEmail('email nao definido');
+      }
+      if (typeof telefone === 'undefined' || telefone === '') {
+        setTelefone('telefone nao definido');
+      }
+      console.log('cpf ======  ');
+      console.log(cpf);
+      if (
+        brand !== '' &&
+        brand !== null &&
+        equipamento !== null &&
+        equipamento !== ''
+      ) {
+        idClient = await createNewClient(name, email, cpf, telefone);
+
+        if (typeof defect_for_repair === 'undefined') {
+          setDefeito('defeito nao definido');
+        }
+        if (typeof cost_value === 'undefined') {
+        }
+        await createNewEquipment(
+          idClient,
+          brand,
+          entregue,
+          defect_for_repair,
+          preco,
+          aparelhoEntregue,
+          equipamento,
+        );
+        setName('');
+        setEmail('');
+        setBrand('');
+        setCpf('');
+        setTelefone('');
+        setPreco('');
+        setDefeito('');
+        setEquipamento('');
+        setEntregue(false);
+        setPronto(false);
+        alert('Cadastro realizado com sucesso!');
+      } else {
+        alert('Erro nos dados de entrada!');
+      }
     }
   };
   return (
@@ -225,7 +291,7 @@ const FormEquipment = ({route, navigate}) => {
             editable={!entregue}
             style={styles1.checkbox}
             value={pronto}
-            onValueChange={value => setPronto(value)}
+            onValueChange={setProntoValue}
           />
           <Text style={styles1.label}>Aparelho pronto!</Text>
         </View>
@@ -234,7 +300,7 @@ const FormEquipment = ({route, navigate}) => {
             editable={!entregue}
             style={styles1.checkbox}
             value={entregue}
-            onValueChange={value => setEntregue(value)}
+            onValueChange={edit => listEquipment(edit)}
           />
           <Text style={styles1.label}>Aparelho entregue!</Text>
         </View>
@@ -244,11 +310,17 @@ const FormEquipment = ({route, navigate}) => {
         </View>
         <View style={{marginVertical: 10}}>
           <Button
-            disabled={entregue}
             style={stylesButton}
-            title="Mostrar lista de equipamento"
-            onPress={() => listEquipment()}
+            title="Salvar Foto"
+            onPress={savePhoto}
           />
+          <View style={{marginVertical: 10}}>
+            <Button
+              style={stylesButton}
+              title="Visualizar Foto"
+              onPress={loadPhoto}
+            />
+          </View>
         </View>
       </ScrollView>
     </>

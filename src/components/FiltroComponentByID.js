@@ -6,7 +6,7 @@ import {PDF_BY_ID} from '../util/urls';
 const FiltroComponentByID = ({navigation}) => {
   const [id, setId] = React.useState();
   const [check, isCheck] = React.useState(false);
-  const handleClick = id => {
+  const handleClick = () => {
     Linking.canOpenURL(PDF_BY_ID + id).then(supported => {
       if (supported) {
         Linking.openURL(PDF_BY_ID + id);
@@ -22,9 +22,7 @@ const FiltroComponentByID = ({navigation}) => {
     navigation.navigate('FormEquipment', {paramKey: id});
   };
   const select = select => {
-    if (false) {
-      navigation.navigate('FormEquipment', {paramKey: id});
-    } else {
+    if (true) {
       handleClick(id);
     }
   };
