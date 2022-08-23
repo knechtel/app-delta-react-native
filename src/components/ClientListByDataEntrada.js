@@ -6,6 +6,7 @@ import {
   StyleSheet,
   RefreshControl,
   Button,
+  View,
 } from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {useEffect} from 'react';
@@ -23,6 +24,7 @@ const ClientListByDataEntrada = () => {
   const navigation = useNavigation();
   const [name, setName] = React.useState();
   const route = useRoute();
+  var newItems = [];
   //var client = {id: 1, name: 'maiquel'};
 
   const _onRefresh = (name1, id1) => {
@@ -71,19 +73,22 @@ const ClientListByDataEntrada = () => {
           data: {id: Number(response1.data[i].client_id)},
         }).then(response => {
           console.log(response.data);
-          setClientList1([response.data]);
+          var clientOne = {id: response.data.id, name: response.data.name};
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+          newItems.push(clientOne);
           //doIt(response.data.id, response.data.name);
         });
       }
     });
-
+    console.log('minha lista');
+    setClientList1(newItems);
     // axios.post(FIND_BY_ID_CLIENT, {id: valor}).then(response => {
     //   this.setState({
     //     client: response.data,
     //   });
     //   console.log(response.data);
     // });
-  }, [route.params.data_entrada, clientId]);
+  }, [route.params.data_entrada, clientId, clientList1, newItems]);
 
   // redirectToHome = () => {
   //   const {navigation} = this.props;
@@ -120,14 +125,16 @@ const ClientListByDataEntrada = () => {
           />
         }>
         {clientList1.map((item, index) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.container}
-            onPress={() => alertItemName(item)}>
-            <Text style={styles.text}>
-              {item.name} - {item.id}{' '}
-            </Text>
-          </TouchableOpacity>
+          <View key={index}>
+            <TouchableOpacity
+              key={item.id}
+              style={styles.container}
+              onPress={() => alertItemName(item)}>
+              <Text style={styles.text}>
+                {item.name} - {item.id}{' '}
+              </Text>
+            </TouchableOpacity>
+          </View>
         ))}
       </ScrollView>
       <Button

@@ -10,7 +10,9 @@ import {
   CREATE_EQUIPMENT,
   FIND_BY_ID_CLIENT,
   FIND_EQUIPMENT_BY_CLIENT,
+  LOAD_IAMAGE,
   UPDATE_CLIENT,
+  UPLOAD_IAMAGE,
 } from '../util/urls';
 import {
   createNewClient,
@@ -40,27 +42,23 @@ const FormEquipment = ({route, navigate}) => {
 
   const [edit, setEdit] = React.useState(false);
   const savePhoto = () => {
-    Linking.canOpenURL('http://10.0.0.199:5000/upOs?id=' + id).then(
-      supported => {
-        if (supported) {
-          Linking.openURL('http://10.0.0.199:5000/upOs?id=' + id);
-        } else {
-          console.log("Don't know how to open URI: ");
-        }
-      },
-    );
+    Linking.canOpenURL(UPLOAD_IAMAGE + id).then(supported => {
+      if (supported) {
+        Linking.openURL(UPLOAD_IAMAGE + id);
+      } else {
+        console.log("Don't know how to open URI: ");
+      }
+    });
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const loadPhoto = () => {
-    Linking.canOpenURL('http://10.0.0.199:5000/img/' + id + '.jpeg').then(
-      supported => {
-        if (supported) {
-          Linking.openURL('http://10.0.0.199:5000/img/' + id + '.jpeg');
-        } else {
-          console.log("Don't know how to open URI: ");
-        }
-      },
-    );
+    Linking.canOpenURL(LOAD_IAMAGE + id + '.jpeg').then(supported => {
+      if (supported) {
+        Linking.openURL(LOAD_IAMAGE + id + '.jpeg');
+      } else {
+        console.log("Don't know how to open URI: ");
+      }
+    });
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const setProntoValue = () => {
@@ -187,33 +185,44 @@ const FormEquipment = ({route, navigate}) => {
         equipamento !== null &&
         equipamento !== ''
       ) {
-        idClient = await createNewClient(name, email, cpf, telefone);
+        if (
+          name === null ||
+          name === '' ||
+          brand === '' ||
+          brand == null ||
+          equipamento == null ||
+          equipamento === ''
+        ) {
+          alert('Campo obrigatório não prenchido!');
+        } else {
+          idClient = await createNewClient(name, email, cpf, telefone);
 
-        if (typeof defect_for_repair === 'undefined') {
-          setDefeito('defeito nao definido');
+          if (typeof defect_for_repair === 'undefined') {
+            setDefeito('defeito nao definido');
+          }
+          if (typeof cost_value === 'undefined') {
+          }
+          await createNewEquipment(
+            idClient,
+            brand,
+            entregue,
+            defect_for_repair,
+            preco,
+            aparelhoEntregue,
+            equipamento,
+          );
+          setName('');
+          setEmail('');
+          setBrand('');
+          setCpf('');
+          setTelefone('');
+          setPreco('');
+          setDefeito('');
+          setEquipamento('');
+          setEntregue(false);
+          setPronto(false);
+          alert('Cadastro realizado com sucesso!');
         }
-        if (typeof cost_value === 'undefined') {
-        }
-        await createNewEquipment(
-          idClient,
-          brand,
-          entregue,
-          defect_for_repair,
-          preco,
-          aparelhoEntregue,
-          equipamento,
-        );
-        setName('');
-        setEmail('');
-        setBrand('');
-        setCpf('');
-        setTelefone('');
-        setPreco('');
-        setDefeito('');
-        setEquipamento('');
-        setEntregue(false);
-        setPronto(false);
-        alert('Cadastro realizado com sucesso!');
       } else {
         alert('Erro nos dados de entrada!');
       }
