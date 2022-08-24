@@ -22,8 +22,9 @@ import {
 } from '../actions/callApi';
 import ListEquipment from './ListEquipment';
 import {useEffect} from 'react';
-
+import CurrencyInput from 'react-native-currency-input';
 const FormEquipment = ({route, navigate}) => {
+  const [value, setValue] = React.useState(2310.458);
   console.log(route.params.paramKey);
   const [name, setName] = React.useState();
   const [telefone, setTelefone] = React.useState();
@@ -115,16 +116,16 @@ const FormEquipment = ({route, navigate}) => {
         setEntregue(jsonEquipment.entregue);
 
         var valor = jsonEquipment.cost_value;
-        console.log('aquiii maiquel: ' + valor);
+        // console.log('aquiii maiquel: ' + valor);
         if (valor === '0E-10') {
-          valor = '0';
+          valor = '0.00';
         } else {
-          valor = valor.replace('0000000000', '');
-          valor = valor.replace('.', '');
+          //   valor = valor.replace('0000000000', '');
+          //   valor = valor.replace('.', '');
         }
         console.log(jsonEquipment.cost_value);
-        console.log(valor);
-        setPreco(valor);
+        console.log('VALOR ANALIZAR = ' + valor);
+        setPreco(Number(valor));
       }
     }
   };
@@ -216,7 +217,7 @@ const FormEquipment = ({route, navigate}) => {
           setBrand('');
           setCpf('');
           setTelefone('');
-          setPreco('');
+          setPreco(0.0);
           setDefeito('');
           setEquipamento('');
           setEntregue(false);
@@ -279,13 +280,17 @@ const FormEquipment = ({route, navigate}) => {
           onChangeText={equipamento => setEquipamento(equipamento)}
           defaultValue={equipamento}
         />
-        <TextInput
+        <CurrencyInput
           editable={!entregue}
-          style={styles.input}
           value={preco}
-          placeholder="Preco"
-          onChangeText={newPreco => setPreco(newPreco)}
-          defaultValue={preco}
+          onChangeValue={setPreco}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={formattedValue => {
+            console.log(formattedValue); // $2,310.46
+          }}
         />
         <TextInput
           editable={!entregue}
