@@ -284,6 +284,7 @@ const FormEquipment = ({route, navigate}) => {
           editable={!entregue}
           value={preco}
           onChangeValue={setPreco}
+          placeholder="Preço"
           prefix="$"
           delimiter=","
           separator="."
