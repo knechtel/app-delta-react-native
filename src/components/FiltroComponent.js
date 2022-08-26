@@ -37,7 +37,7 @@ class FiltroComponent extends Component {
   render() {
     return (
       <>
-        <Text>Aparelho do cliente _</Text>
+        <Text>Controle de ordem de serviço _</Text>
         <ScrollView>
           <View style={{marginVertical: 10}}>
             <Button
