@@ -18,6 +18,8 @@ import FiltroComponentByID from './components/FiltroComponentByID';
 
 import FiltroComponentDataEntrada from './components/FiltroComponentDataEntrada';
 import ClientListByDataEntrada from './components/ClientListByDataEntrada';
+import ClientListByDataEntrega from './components/ClientListByDataEntrega';
+import FiltroComponentDataEntrega from './components/FiltroComponentDataEntrega';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -64,8 +66,18 @@ const App = () => {
             options={{title: 'Eletrônica Delta'}}
           />
           <Stack.Screen
+            name="ClientListByDataEntrega"
+            component={ClientListByDataEntrega}
+            options={{title: 'Eletrônica Delta'}}
+          />
+          <Stack.Screen
             name="FiltroComponentDataEntrada"
             component={FiltroComponentDataEntrada}
+            options={{title: 'Eletrônica Delta'}}
+          />
+          <Stack.Screen
+            name="FiltroComponentDataEntrega"
+            component={FiltroComponentDataEntrega}
             options={{title: 'Eletrônica Delta'}}
           />
         </Stack.Navigator>
