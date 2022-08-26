@@ -26,11 +26,21 @@ class FiltroComponent extends Component {
     const {navigation} = this.props;
     navigation.navigate('ClientList');
   };
+  doNewClient = () => {
+    const {navigation} = this.props;
+    navigation.navigate('FormEquipment', {paramKey: 0}, navigation);
+  };
   render() {
     return (
       <>
         <Text>Aparelho do cliente _</Text>
         <ScrollView>
+          <View style={{marginVertical: 10}}>
+            <Button
+              title="Cadastrar Cliente"
+              onPress={() => this.doNewClient()}
+            />
+          </View>
           <View style={{marginVertical: 10}}>
             <Button title="All Clients" onPress={() => this.listClient()} />
           </View>
