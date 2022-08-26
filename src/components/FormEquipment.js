@@ -168,16 +168,7 @@ const FormEquipment = ({route, navigate}) => {
       //se nao cria cliente
       console.log('MMMMMMMMMMM');
       console.log(defect_for_repair);
-      if (typeof cpf === 'undefined' || cpf === '') {
-        setCpf('cpf nao definido');
-        console.log('Entrou aquiiiii ...');
-      }
-      if (typeof email === 'undefined' || email === '') {
-        setEmail('email nao definido');
-      }
-      if (typeof telefone === 'undefined' || telefone === '') {
-        setTelefone('telefone nao definido');
-      }
+
       console.log('cpf ======  ');
       console.log(cpf);
       if (
@@ -196,6 +187,17 @@ const FormEquipment = ({route, navigate}) => {
         ) {
           alert('Campo obrigatório não prenchido!');
         } else {
+          if (typeof cpf === 'undefined' || cpf === '') {
+            setCpf('cpf nao definido');
+            console.log('Entrou aquiiiii ...');
+          }
+          if (typeof email === 'undefined' || email === '') {
+            setEmail('email nao definido');
+          }
+          if (typeof telefone === 'undefined' || telefone === '') {
+            setTelefone('telefone nao definido');
+          }
+          console.log('telefone ===  ' + telefone);
           idClient = await createNewClient(name, email, cpf, telefone);
 
           if (typeof defect_for_repair === 'undefined') {
