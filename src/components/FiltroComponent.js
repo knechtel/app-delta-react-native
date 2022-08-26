@@ -22,6 +22,10 @@ class FiltroComponent extends Component {
     navigation.navigate('FiltroComponentDataEntrada');
     console.log('ola');
   };
+  dataEntrega = () => {
+    const {navigation} = this.props;
+    navigation.navigate('FiltroComponentDataEntrega');
+  };
   listClient = () => {
     const {navigation} = this.props;
     navigation.navigate('ClientList');
@@ -51,6 +55,12 @@ class FiltroComponent extends Component {
             <Button
               title="por data de entrada "
               onPress={() => this.dataEntrada()}
+            />
+          </View>
+          <View style={{marginVertical: 10}}>
+            <Button
+              title="por data de Saída "
+              onPress={() => this.dataEntrega()}
             />
           </View>
           <View style={{marginVertical: 10}}>
