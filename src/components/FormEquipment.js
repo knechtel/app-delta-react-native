@@ -119,7 +119,7 @@ const FormEquipment = ({route, navigate}) => {
         setEntregue(jsonEquipment.entregue);
         setObs(jsonEquipment.obs);
         var valor = jsonEquipment.cost_value;
-
+        console.log('---->= aparelho ' + jsonEquipment.entregue);
         console.log(jsonEquipment.cost_value);
         console.log('VALOR ANALIZAR = ' + valor);
         setPreco(Number(valor));
@@ -153,10 +153,9 @@ const FormEquipment = ({route, navigate}) => {
         await updateEquipment(
           idEquipment,
           brand,
-          entregue,
           defect_for_repair,
           preco,
-          aparelhoEntregue,
+          entregue,
           equipamento,
           pronto,
           obs,
