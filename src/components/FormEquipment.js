@@ -117,15 +117,9 @@ const FormEquipment = ({route, navigate}) => {
         setEquipamento(jsonEquipment.model);
         setPronto(jsonEquipment.pronto);
         setEntregue(jsonEquipment.entregue);
-        setEntregue(jsonEquipment.obs);
+        setObs(jsonEquipment.obs);
         var valor = jsonEquipment.cost_value;
-        // console.log('aquiii maiquel: ' + valor);
-        if (valor === '0E-10') {
-          valor = '0.00';
-        } else {
-          //   valor = valor.replace('0000000000', '');
-          //   valor = valor.replace('.', '');
-        }
+
         console.log(jsonEquipment.cost_value);
         console.log('VALOR ANALIZAR = ' + valor);
         setPreco(Number(valor));
@@ -361,11 +355,10 @@ const FormEquipment = ({route, navigate}) => {
             editable={!entregue}
             style={styles1.checkbox}
             value={entregue}
-            onValueChange={edit => listEquipment(edit)}
+            onValueChange={listEquipment}
           />
           <Text style={styles1.label}>Aparelho entregue!</Text>
         </View>
-
         <View style={{marginVertical: 10}}>
           <Button title="Enviar" onPress={createClient} />
         </View>
