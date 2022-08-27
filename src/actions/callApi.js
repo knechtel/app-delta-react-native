@@ -5,7 +5,7 @@ import {
   UPDATE_EQUIPMENT,
 } from '../util/urls';
 import axios from 'axios';
-async function createNewClient(name, email, cpf, telefone) {
+async function createNewClient(name, email, cpf, telefone, endereco) {
   var idClient;
   await axios({
     method: 'post',
@@ -18,6 +18,7 @@ async function createNewClient(name, email, cpf, telefone) {
       email: email,
       cpf: cpf,
       telefone: telefone,
+      endereco: endereco,
     },
   }).then(response => {
     idClient = response.data.id;
@@ -34,6 +35,7 @@ async function createNewEquipment(
   preco,
   aparelhoEntregue,
   equipamento,
+  obs,
 ) {
   await axios({
     method: 'post',
@@ -49,11 +51,12 @@ async function createNewEquipment(
       preco: preco,
       model: equipamento,
       pronto: false,
+      obs: obs,
     },
   });
 }
 
-async function updateCliente(id, name, email, cpf, telefone) {
+async function updateCliente(id, name, email, cpf, telefone, endereco) {
   var idClient;
   await axios({
     method: 'post',
@@ -67,6 +70,7 @@ async function updateCliente(id, name, email, cpf, telefone) {
       email: email,
       cpf: cpf,
       telefone: telefone,
+      endereco: endereco,
     },
   }).then(response => {
     idClient = response.data.id;
@@ -84,6 +88,7 @@ async function updateEquipment(
   aparelhoEntregue,
   equipamento,
   pronto,
+  obs,
 ) {
   await axios({
     method: 'post',
@@ -100,6 +105,7 @@ async function updateEquipment(
       model: equipamento,
       serial: '',
       pronto: pronto,
+      obs: obs,
     },
   }).then(response => {
     console.log();

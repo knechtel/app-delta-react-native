@@ -32,6 +32,8 @@ const FormEquipment = ({route, navigate}) => {
   const [idEquipment, setIdEquipment] = React.useState();
   const [email, setEmail] = React.useState();
   const [cpf, setCpf] = React.useState();
+  const [endereco, setEndereco] = React.useState();
+  const [obs, setObs] = React.useState();
   const [preco, setPreco] = React.useState();
   const [defect_for_repair, setDefeito] = React.useState();
   const navigation = useNavigation();
@@ -91,6 +93,7 @@ const FormEquipment = ({route, navigate}) => {
       setCpf(json.cpf);
       setId(json.id);
       setTelefone(json.telefone);
+      setEndereco(json.endereco);
 
       const responseT = await fetch(FIND_EQUIPMENT_BY_CLIENT, {
         method: 'POST',
@@ -114,7 +117,7 @@ const FormEquipment = ({route, navigate}) => {
         setEquipamento(jsonEquipment.model);
         setPronto(jsonEquipment.pronto);
         setEntregue(jsonEquipment.entregue);
-
+        setEntregue(jsonEquipment.obs);
         var valor = jsonEquipment.cost_value;
         // console.log('aquiii maiquel: ' + valor);
         if (valor === '0E-10') {
@@ -147,7 +150,7 @@ const FormEquipment = ({route, navigate}) => {
     console.log('este é o id --> ' + id);
     //if com opcao de edicao
     if (id !== null && id !== 0 && typeof id !== 'undefined') {
-      idClient = await updateCliente(id, name, email, cpf, telefone);
+      idClient = await updateCliente(id, name, email, cpf, telefone, endereco);
       console.log('valor de pronto ------- ');
       console.log(pronto);
       console.log('valor de id ---- ' + id);
@@ -162,10 +165,36 @@ const FormEquipment = ({route, navigate}) => {
           aparelhoEntregue,
           equipamento,
           pronto,
+          obs,
         );
       }
     } else {
       //se nao cria cliente
+      if (typeof cpf === 'undefined' || cpf === '') {
+        setCpf('cpf nao definido');
+        console.log('Entrou aquiiiii ...');
+      } else {
+        setCpf(cpf);
+      }
+      if (typeof email === 'undefined' || email === '') {
+        setEmail('email nao definido');
+        console.log('Entrou aquiiiii ...');
+      } else {
+        setEmail(email);
+      }
+      if (typeof telefone === 'undefined' || telefone === '') {
+        console.log('Entrou aquiiiii ...');
+        setTelefone('telefone nao definido');
+      } else {
+        setTelefone(telefone);
+      }
+      if (typeof endereco === 'undefined' || endereco === '') {
+        console.log('Entrou aquiiiii ...');
+        setEndereco('Endereco nao definido');
+      } else {
+        setEndereco(endereco);
+      }
+      console.log('telefone ===  ' + telefone);
       console.log('MMMMMMMMMMM');
       console.log(defect_for_repair);
 
@@ -187,18 +216,15 @@ const FormEquipment = ({route, navigate}) => {
         ) {
           alert('Campo obrigatório não prenchido!');
         } else {
-          if (typeof cpf === 'undefined' || cpf === '') {
-            setCpf('cpf nao definido');
-            console.log('Entrou aquiiiii ...');
-          }
-          if (typeof email === 'undefined' || email === '') {
-            setEmail('email nao definido');
-          }
-          if (typeof telefone === 'undefined' || telefone === '') {
-            setTelefone('telefone nao definido');
-          }
-          console.log('telefone ===  ' + telefone);
-          idClient = await createNewClient(name, email, cpf, telefone);
+          console.log('doTheCall');
+          console.log('telefone =>' + telefone);
+          idClient = await createNewClient(
+            name,
+            email,
+            cpf,
+            telefone,
+            endereco,
+          );
 
           if (typeof defect_for_repair === 'undefined') {
             setDefeito('defeito nao definido');
@@ -213,6 +239,7 @@ const FormEquipment = ({route, navigate}) => {
             preco,
             aparelhoEntregue,
             equipamento,
+            obs,
           );
           setName('');
           setEmail('');
@@ -222,6 +249,7 @@ const FormEquipment = ({route, navigate}) => {
           setPreco(0.0);
           setDefeito('');
           setEquipamento('');
+          setObs('');
           setEntregue(false);
           setPronto(false);
           alert('Cadastro realizado com sucesso!');
@@ -249,6 +277,14 @@ const FormEquipment = ({route, navigate}) => {
           placeholder="Telefone"
           onChangeText={telefone => setTelefone(telefone)}
           defaultValue={telefone}
+        />
+        <TextInput
+          editable={!entregue}
+          style={styles.input}
+          value={endereco}
+          placeholder="Endereço"
+          onChangeText={endereco => setEndereco(endereco)}
+          defaultValue={endereco}
         />
         <TextInput
           editable={!entregue}
@@ -302,6 +338,14 @@ const FormEquipment = ({route, navigate}) => {
           placeholder="Defeito"
           onChangeText={defect_for_repair => setDefeito(defect_for_repair)}
           defaultValue={defect_for_repair}
+        />
+        <TextInput
+          editable={!entregue}
+          style={styles.input}
+          value={obs}
+          placeholder="obs"
+          onChangeText={obs => setObs(obs)}
+          defaultValue={obs}
         />
         <View style={styles1.checkboxContainer}>
           <CheckBox
