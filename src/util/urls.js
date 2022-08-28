@@ -19,3 +19,5 @@ export const FIND_ALL_CLIENT =
 export const PDF_BY_ID = 'http://a7fe-177-74-122-85.ngrok.io/download?id=';
 export const LOAD_IAMAGE = 'http://a7fe-177-74-122-85.ngrok.io/img/';
 export const UPLOAD_IAMAGE = 'http://a7fe-177-74-122-85.ngrok.io/upOs?id=';
+export const EQUIPMENT_FIND_DATA_ENTREGA =
+  'http://a7fe-177-74-122-85.ngrok.io/api/equipment-findByDataEntrega';
