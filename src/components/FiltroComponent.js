@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
 import {Text, View, Button} from 'react-native';
 import {ScrollView, StyleSheet, Linking} from 'react-native';
-import {PDF_BY_ID} from '../util/urls';
+import {PDF_BY_ID, PHOTO_SERVIDOR} from '../util/urls';
 
 class FiltroComponent extends Component {
   handleClick = id => {
     Linking.canOpenURL(PDF_BY_ID + id).then(supported => {
       if (supported) {
         Linking.openURL(PDF_BY_ID + id);
+      } else {
+        console.log("Don't know how to open URI: ");
+      }
+    });
+  };
+  photoServidor = () => {
+    Linking.canOpenURL(PHOTO_SERVIDOR).then(supported => {
+      if (supported) {
+        Linking.openURL(PHOTO_SERVIDOR);
       } else {
         console.log("Don't know how to open URI: ");
       }
@@ -65,6 +74,9 @@ class FiltroComponent extends Component {
           </View>
           <View style={{marginVertical: 10}}>
             <Button title="PDF" onPress={() => this.numeroOS()} />
+          </View>
+          <View style={{marginVertical: 10}}>
+            <Button title="Foto Macbook" onPress={() => this.photoServidor()} />
           </View>
         </ScrollView>
       </>

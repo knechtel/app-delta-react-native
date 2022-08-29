@@ -126,14 +126,17 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitectures")
 
 android {
+     
+
+
     ndkVersion rootProject.ext.ndkVersion
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.deltareactn"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
     }
@@ -189,6 +192,9 @@ android {
 }
 
 dependencies {
+       implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.1")
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

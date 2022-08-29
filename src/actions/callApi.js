@@ -82,10 +82,9 @@ async function updateCliente(id, name, email, cpf, telefone, endereco) {
 async function updateEquipment(
   id,
   brand,
-  entregue,
   defect_for_repair,
   preco,
-  aparelhoEntregue,
+  entregue,
   equipamento,
   pronto,
   obs,

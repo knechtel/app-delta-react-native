@@ -21,3 +21,5 @@ export const LOAD_IAMAGE = 'http://a7fe-177-74-122-85.ngrok.io/img/';
 export const UPLOAD_IAMAGE = 'http://a7fe-177-74-122-85.ngrok.io/upOs?id=';
 export const EQUIPMENT_FIND_DATA_ENTREGA =
   'http://a7fe-177-74-122-85.ngrok.io/api/equipment-findByDataEntrega';
+export const PHOTO_SERVIDOR =
+  'http://a7fe-177-74-122-85.ngrok.io/print/download';
